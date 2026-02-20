@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Upload, X } from "lucide-react";
 
 interface Props {
@@ -26,11 +27,12 @@ export const HeaderImageSection: React.FC<Props> = ({
       </button>
     ) : (
       <div className="relative">
-        <div className="w-full aspect-[3/1] overflow-hidden bg-stone-100">
-          <img
+        <div className="relative w-full aspect-[3/1] overflow-hidden bg-stone-100">
+          <Image
             src={headerImage}
             alt="대표 이미지"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
         </div>
         <button
