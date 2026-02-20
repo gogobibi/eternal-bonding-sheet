@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Upload, X } from "lucide-react";
 import { SectionCard } from "../atoms/SectionCard";
 import { MeLabel } from "../atoms/MeLabel";
@@ -74,10 +75,11 @@ export const CharacterSection: React.FC<Props> = ({
                 key={photo.id}
                 className="relative aspect-square bg-stone-100 rounded-xl overflow-hidden group"
               >
-                <img
+                <Image
                   src={photo.imageUrl}
                   alt="커마"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
                 <button
                   onClick={() =>
@@ -97,10 +99,11 @@ export const CharacterSection: React.FC<Props> = ({
             {charImages.map((photo) => (
               <div key={photo.id} className="flex gap-3 items-start">
                 <div className="relative flex-shrink-0 w-20 h-20 bg-stone-100 rounded-xl overflow-hidden group">
-                  <img
+                  <Image
                     src={photo.imageUrl}
                     alt="커마"
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                   <button
                     onClick={() =>
