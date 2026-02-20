@@ -1,5 +1,4 @@
 import React from "react";
-import { C } from "./card-colors";
 import type { ProfileData } from "../profile-editor/types";
 import { CardHeader } from "./sections/CardHeader";
 import { CardNickname } from "./sections/CardNickname";
@@ -17,17 +16,10 @@ export const ProfileCard = React.forwardRef<
 >(({ data }, ref) => (
   <div
     ref={ref}
-    style={{
-      width: "390px",
-      backgroundColor: C.bg,
-      fontFamily:
-        '"Noto Sans KR", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
-      color: C.stone800,
-      overflow: "hidden",
-    }}
+    className="w-[390px] bg-[#FAFAF7] font-sans text-stone-800 overflow-hidden"
   >
     <CardHeader headerImage={data.headerImage} />
-    <div style={{ padding: "28px 24px 20px" }}>
+    <div className="px-6 pt-7 pb-5">
       <CardNickname nickname={data.nickname} server={data.server} />
       <CardBasicInfo data={data} />
       <CardCharacter data={data} />

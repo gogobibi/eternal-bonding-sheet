@@ -1,6 +1,4 @@
 import React from "react";
-import { C } from "../card-colors";
-import { s } from "../card-styles";
 import { SectionBlock } from "../atoms/SectionBlock";
 import type { ProfileData } from "../../profile-editor/types";
 
@@ -11,93 +9,49 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
   if (!hasCharSection) return null;
 
   return (
-    <div style={{ marginBottom: "24px" }}>
+    <div className="mb-6">
       <SectionBlock title="커마">
         {(data.charImages.length > 0 || data.charMemo) && (
-          <div style={{ marginBottom: data.youCharMemo ? "16px" : "0" }}>
-            <div style={s.meLabel}>ME</div>
+          <div className={data.youCharMemo ? "mb-4" : ""}>
+            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2">
+              ME
+            </div>
             {data.charImages.length > 0 &&
               (data.displayOption === "image-only" ? (
                 <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(2, 1fr)",
-                    gap: "6px",
-                    marginBottom: data.charMemo ? "10px" : "0",
-                  }}
+                  className={`grid grid-cols-2 gap-1.5 ${data.charMemo ? "mb-2.5" : ""}`}
                 >
                   {data.charImages.map((photo) => (
                     <div
                       key={photo.id}
-                      style={{
-                        aspectRatio: "1",
-                        overflow: "hidden",
-                        borderRadius: "10px",
-                        backgroundColor: C.stone200,
-                      }}
+                      className="aspect-square overflow-hidden rounded-[10px] bg-stone-200"
                     >
                       <img
                         src={photo.imageUrl}
                         alt="커마"
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          display: "block",
-                        }}
+                        className="w-full h-full object-cover block"
                       />
                     </div>
                   ))}
                 </div>
               ) : (
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "8px",
-                    marginBottom: data.charMemo ? "10px" : "0",
-                  }}
+                  className={`flex flex-col gap-2 ${data.charMemo ? "mb-2.5" : ""}`}
                 >
                   {data.charImages.map((photo) => (
                     <div
                       key={photo.id}
-                      style={{
-                        display: "flex",
-                        gap: "10px",
-                        alignItems: "flex-start",
-                      }}
+                      className="flex gap-2.5 items-start"
                     >
-                      <div
-                        style={{
-                          flexShrink: 0,
-                          width: "72px",
-                          height: "72px",
-                          borderRadius: "10px",
-                          overflow: "hidden",
-                          backgroundColor: C.stone200,
-                        }}
-                      >
+                      <div className="shrink-0 w-[72px] h-[72px] rounded-[10px] overflow-hidden bg-stone-200">
                         <img
                           src={photo.imageUrl}
                           alt="커마"
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            display: "block",
-                          }}
+                          className="w-full h-full object-cover block"
                         />
                       </div>
                       {photo.description && (
-                        <div
-                          style={{
-                            flex: 1,
-                            fontSize: "10px",
-                            color: C.stone600,
-                            lineHeight: 1.7,
-                            paddingTop: "4px",
-                          }}
-                        >
+                        <div className="flex-1 text-[10px] text-stone-600 leading-[1.7] pt-1">
                           {photo.description}
                         </div>
                       )}
@@ -106,17 +60,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                 </div>
               ))}
             {data.charMemo && (
-              <div
-                style={{
-                  fontSize: "10px",
-                  color: C.stone600,
-                  lineHeight: 1.7,
-                  padding: "8px 12px",
-                  backgroundColor: C.stone100,
-                  borderRadius: "8px",
-                  whiteSpace: "pre-wrap",
-                }}
-              >
+              <div className="text-[10px] text-stone-600 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg whitespace-pre-wrap">
                 {data.charMemo}
               </div>
             )}
@@ -124,19 +68,10 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
         )}
         {data.youCharMemo && (
           <div>
-            <div style={{ ...s.meLabel, textAlign: "right" }}>YOU</div>
-            <div
-              style={{
-                fontSize: "10px",
-                color: C.stone600,
-                lineHeight: 1.7,
-                padding: "8px 12px",
-                backgroundColor: C.stone100,
-                borderRadius: "8px",
-                textAlign: "right",
-                whiteSpace: "pre-wrap",
-              }}
-            >
+            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2 text-right">
+              YOU
+            </div>
+            <div className="text-[10px] text-stone-600 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg text-right whitespace-pre-wrap">
               {data.youCharMemo}
             </div>
           </div>

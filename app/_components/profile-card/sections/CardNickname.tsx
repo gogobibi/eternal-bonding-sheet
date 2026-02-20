@@ -1,5 +1,4 @@
 import React from "react";
-import { C } from "../card-colors";
 
 export const CardNickname: React.FC<{
   nickname: string;
@@ -7,47 +6,15 @@ export const CardNickname: React.FC<{
 }> = ({ nickname, server }) => {
   if (!nickname && !server) return null;
   return (
-    <div
-      style={{
-        textAlign: "center",
-        marginBottom: "26px",
-        paddingBottom: "22px",
-        borderBottom: `1px solid ${C.stone200}`,
-      }}
-    >
+    <div className="text-center mb-[26px] pb-[22px] border-b border-stone-200">
       {nickname && (
-        <div
-          style={{
-            fontSize: "22px",
-            fontWeight: 600,
-            color: C.stone800,
-            letterSpacing: "0.04em",
-            marginBottom: "8px",
-          }}
-        >
+        <div className="text-[22px] font-semibold text-stone-800 tracking-[0.04em] mb-2">
           {nickname}
         </div>
       )}
-      <div
-        style={{
-          display: "flex",
-          gap: "6px",
-          justifyContent: "center",
-          flexWrap: "wrap",
-        }}
-      >
+      <div className="flex gap-1.5 justify-center flex-wrap">
         {server && (
-          <span
-            style={{
-              padding: "3px 12px",
-              borderRadius: "999px",
-              fontSize: "11px",
-              backgroundColor: C.violet100,
-              color: C.violet700,
-              border: `1px solid ${C.violet200}`,
-              fontWeight: 500,
-            }}
-          >
+          <span className="py-[3px] px-3 rounded-full text-[11px] bg-violet-100 text-violet-700 border border-violet-200 font-medium">
             {server}
           </span>
         )}

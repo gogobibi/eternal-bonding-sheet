@@ -52,14 +52,7 @@ export function ProfileEditor() {
       {/* Hidden Capture Target */}
       <div
         aria-hidden="true"
-        style={{
-          position: "fixed",
-          left: "-9999px",
-          top: 0,
-          width: "390px",
-          zIndex: -9999,
-          pointerEvents: "none",
-        }}
+        className="fixed -left-[9999px] top-0 w-[390px] -z-[9999] pointer-events-none"
       >
         <div ref={captureRef}>
           <ProfileCard data={form.profileData} />

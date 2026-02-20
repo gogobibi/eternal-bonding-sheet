@@ -1,10 +1,15 @@
 import React from "react";
-import { C } from "../card-colors";
 
-export const OptionMark: React.FC<{ value: string }> = ({ value }) => {
-  const color =
-    value === "O" ? C.green600 : value === "X" ? C.red500 : C.orange500;
-  return (
-    <span style={{ fontSize: "13px", fontWeight: 700, color }}>{value}</span>
-  );
-};
+export const OptionMark: React.FC<{ value: string }> = ({ value }) => (
+  <span
+    className={`text-[13px] font-bold ${
+      value === "O"
+        ? "text-emerald-600"
+        : value === "X"
+          ? "text-red-500"
+          : "text-orange-500"
+    }`}
+  >
+    {value}
+  </span>
+);

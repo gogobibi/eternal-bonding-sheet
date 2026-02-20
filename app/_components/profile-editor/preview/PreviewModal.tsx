@@ -19,8 +19,7 @@ export const PreviewModal: React.FC<Props> = ({
     }}
   >
     <div
-      className="bg-white rounded-3xl overflow-hidden w-full max-w-sm flex flex-col shadow-2xl"
-      style={{ maxHeight: "88vh" }}
+      className="bg-white rounded-3xl overflow-hidden w-full max-w-sm flex flex-col shadow-2xl max-h-[88vh]"
     >
       <div className="flex items-center justify-between px-5 py-4 border-b border-stone-100">
         <div>
