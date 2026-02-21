@@ -38,8 +38,7 @@ export const PreviewPanel: React.FC<Props> = ({
 
       {/* Live ProfileCard */}
       <div
-        className="overflow-y-auto overflow-x-auto"
-        style={{ maxHeight: "calc(100vh - 220px)" }}
+        className="overflow-y-auto overflow-x-auto max-h-[calc(100vh-220px)]"
       >
         <ProfileCard data={profileData} />
       </div>

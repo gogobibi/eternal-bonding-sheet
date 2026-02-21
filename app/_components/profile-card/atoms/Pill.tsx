@@ -1,5 +1,4 @@
 import React from "react";
-import { C } from "../card-colors";
 
 export const Pill: React.FC<{
   children: React.ReactNode;
@@ -7,16 +6,13 @@ export const Pill: React.FC<{
   size?: "sm" | "md";
 }> = ({ children, accent, size = "md" }) => (
   <span
-    style={{
-      display: "inline-block",
-      padding: size === "sm" ? "1px 6px" : "2px 8px",
-      borderRadius: "999px",
-      fontSize: size === "sm" ? "9px" : "10px",
-      lineHeight: 1.7,
-      border: `1px solid ${accent ? C.violet200 : C.stone200}`,
-      backgroundColor: accent ? C.violet50 : C.stone100,
-      color: accent ? C.violet600 : C.stone500,
-    }}
+    className={`inline-block rounded-full leading-[1.7] border ${
+      size === "sm" ? "px-1.5 py-px text-[9px]" : "px-2 py-0.5 text-[10px]"
+    } ${
+      accent
+        ? "border-violet-200 bg-violet-50 text-violet-600"
+        : "border-stone-200 bg-stone-100 text-stone-500"
+    }`}
   >
     {children}
   </span>

@@ -1,6 +1,4 @@
 import React from "react";
-import { C } from "../card-colors";
-import { s } from "../card-styles";
 import { SectionBlock } from "../atoms/SectionBlock";
 import { Pill } from "../atoms/Pill";
 import type { ProfileData } from "../../profile-editor/types";
@@ -19,61 +17,27 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
     !!data.meTimeMemo;
 
   return (
-    <div style={{ marginBottom: "24px" }}>
+    <div className="mb-6">
       <SectionBlock title="기본 소개">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "0",
-          }}
-        >
+        <div className="grid grid-cols-2">
           {/* ME */}
-          <div style={{ paddingRight: "16px" }}>
-            <div style={s.meLabel}>ME</div>
+          <div className="pr-4">
+            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2">
+              ME
+            </div>
             {meHasData ? (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "6px",
-                }}
-              >
+              <div className="flex flex-col gap-1.5">
                 {meGenderDisplay && (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: "9px",
-                        color: C.stone400,
-                        minWidth: "26px",
-                      }}
-                    >
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[9px] text-stone-400 min-w-[26px]">
                       성별
                     </span>
                     <Pill>{meGenderDisplay}</Pill>
                   </div>
                 )}
                 {data.meAge && (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: "9px",
-                        color: C.stone400,
-                        minWidth: "26px",
-                      }}
-                    >
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[9px] text-stone-400 min-w-[26px]">
                       나이
                     </span>
                     <Pill>{data.meAge}</Pill>
@@ -81,44 +45,25 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                 )}
                 {(data.meWeekday.length > 0 || data.meWeekend.length > 0) && (
                   <div>
-                    <span
-                      style={{
-                        fontSize: "9px",
-                        color: C.stone400,
-                        display: "block",
-                        marginBottom: "4px",
-                      }}
-                    >
+                    <span className="text-[9px] text-stone-400 block mb-1">
                       접속
                     </span>
                     {data.meWeekday.length > 0 && (
-                      <div style={{ marginBottom: "3px" }}>
-                        <span
-                          style={{
-                            fontSize: "8px",
-                            color: C.violet500,
-                            marginRight: "4px",
-                          }}
-                        >
+                      <div className="mb-[3px]">
+                        <span className="text-[8px] text-violet-500 mr-1">
                           평일
                         </span>
-                        <span style={{ fontSize: "9px", color: C.stone600 }}>
+                        <span className="text-[9px] text-stone-600">
                           {data.meWeekday.join(" · ")}
                         </span>
                       </div>
                     )}
                     {data.meWeekend.length > 0 && (
                       <div>
-                        <span
-                          style={{
-                            fontSize: "8px",
-                            color: C.violet500,
-                            marginRight: "4px",
-                          }}
-                        >
+                        <span className="text-[8px] text-violet-500 mr-1">
                           주말
                         </span>
-                        <span style={{ fontSize: "9px", color: C.stone600 }}>
+                        <span className="text-[9px] text-stone-600">
                           {data.meWeekend.join(" · ")}
                         </span>
                       </div>
@@ -126,102 +71,43 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                   </div>
                 )}
                 {data.meTimeMemo && (
-                  <div
-                    style={{
-                      fontSize: "9px",
-                      color: C.stone500,
-                      lineHeight: 1.6,
-                      fontStyle: "italic",
-                      marginTop: "2px",
-                    }}
-                  >
+                  <div className="text-[9px] text-stone-500 leading-[1.6] italic mt-0.5">
                     {data.meTimeMemo}
                   </div>
                 )}
               </div>
             ) : (
-              <div style={{ fontSize: "9px", color: C.stone300 }}>—</div>
+              <div className="text-[9px] text-stone-300">—</div>
             )}
           </div>
 
           {/* YOU */}
-          <div
-            style={{
-              paddingLeft: "16px",
-              borderLeft: `1px solid ${C.stone200}`,
-            }}
-          >
-            <div style={{ ...s.meLabel, textAlign: "right" }}>YOU</div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "6px",
-                alignItems: "flex-end",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  justifyContent: "flex-end",
-                }}
-              >
+          <div className="pl-4 border-l border-stone-200">
+            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2 text-right">
+              YOU
+            </div>
+            <div className="flex flex-col gap-1.5 items-end">
+              <div className="flex items-center gap-1.5 justify-end">
                 <Pill>{youGenderDisplay || "무관"}</Pill>
-                <span
-                  style={{
-                    fontSize: "9px",
-                    color: C.stone400,
-                    minWidth: "26px",
-                    textAlign: "right",
-                  }}
-                >
+                <span className="text-[9px] text-stone-400 min-w-[26px] text-right">
                   성별
                 </span>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  justifyContent: "flex-end",
-                }}
-              >
+              <div className="flex items-center gap-1.5 justify-end">
                 <Pill>{data.youAge || "무관"}</Pill>
-                <span
-                  style={{
-                    fontSize: "9px",
-                    color: C.stone400,
-                    minWidth: "26px",
-                    textAlign: "right",
-                  }}
-                >
+                <span className="text-[9px] text-stone-400 min-w-[26px] text-right">
                   나이
                 </span>
               </div>
-              <div style={{ textAlign: "right" }}>
-                <span
-                  style={{
-                    fontSize: "9px",
-                    color: C.stone400,
-                    display: "block",
-                    marginBottom: "4px",
-                  }}
-                >
+              <div className="text-right">
+                <span className="text-[9px] text-stone-400 block mb-1">
                   접속
                 </span>
-                <div style={{ marginBottom: "3px" }}>
-                  <span
-                    style={{
-                      fontSize: "8px",
-                      color: C.violet500,
-                      marginLeft: "4px",
-                    }}
-                  >
+                <div className="mb-[3px]">
+                  <span className="text-[8px] text-violet-500 ml-1">
                     평일
                   </span>
-                  <div style={{ fontSize: "9px", color: C.stone600 }}>
+                  <div className="text-[9px] text-stone-600">
                     {data.youWeekdayAny
                       ? "무관"
                       : data.youWeekday.length > 0
@@ -230,16 +116,10 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                   </div>
                 </div>
                 <div>
-                  <span
-                    style={{
-                      fontSize: "8px",
-                      color: C.violet500,
-                      marginLeft: "4px",
-                    }}
-                  >
+                  <span className="text-[8px] text-violet-500 ml-1">
                     주말
                   </span>
-                  <div style={{ fontSize: "9px", color: C.stone600 }}>
+                  <div className="text-[9px] text-stone-600">
                     {data.youWeekendAny
                       ? "무관"
                       : data.youWeekend.length > 0
@@ -249,16 +129,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                 </div>
               </div>
               {data.youTimeMemo && (
-                <div
-                  style={{
-                    fontSize: "9px",
-                    color: C.stone500,
-                    lineHeight: 1.6,
-                    fontStyle: "italic",
-                    textAlign: "right",
-                    marginTop: "2px",
-                  }}
-                >
+                <div className="text-[9px] text-stone-500 leading-[1.6] italic text-right mt-0.5">
                   {data.youTimeMemo}
                 </div>
               )}
