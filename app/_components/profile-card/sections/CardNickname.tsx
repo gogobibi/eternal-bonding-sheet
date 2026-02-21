@@ -6,15 +6,15 @@ export const CardNickname: React.FC<{
 }> = ({ nickname, server }) => {
   if (!nickname && !server) return null;
   return (
-    <div className="text-center mb-[26px] pb-[22px] border-b border-stone-200">
+    <div className="mb-[26px] border-b border-stone-200 pb-[22px] text-center">
       {nickname && (
-        <div className="text-[22px] font-semibold text-stone-800 tracking-[0.04em] mb-2">
+        <div className="mb-2 text-[22px] font-semibold tracking-[0.04em] text-stone-800">
           {nickname}
         </div>
       )}
-      <div className="flex gap-1.5 justify-center flex-wrap">
+      <div className="flex flex-wrap justify-center gap-1.5">
         {server && (
-          <span className="py-[3px] px-3 rounded-full text-[11px] bg-violet-100 text-violet-700 border border-violet-200 font-medium">
+          <span className="rounded-full border border-violet-200 bg-violet-100 px-3 py-[3px] text-[11px] font-medium text-violet-700">
             {server}
           </span>
         )}

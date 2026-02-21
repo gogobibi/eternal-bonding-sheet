@@ -22,14 +22,14 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
         <div className="grid grid-cols-2">
           {/* ME */}
           <div className="pr-4">
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2">
+            <div className="mb-2 text-[9px] font-semibold tracking-[0.2em] text-violet-500 uppercase">
               ME
             </div>
             {meHasData ? (
               <div className="flex flex-col gap-1.5">
                 {meGenderDisplay && (
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[9px] text-stone-400 min-w-[26px]">
+                    <span className="min-w-[26px] text-[9px] text-stone-400">
                       성별
                     </span>
                     <Pill>{meGenderDisplay}</Pill>
@@ -37,7 +37,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                 )}
                 {data.meAge && (
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[9px] text-stone-400 min-w-[26px]">
+                    <span className="min-w-[26px] text-[9px] text-stone-400">
                       나이
                     </span>
                     <Pill>{data.meAge}</Pill>
@@ -45,12 +45,12 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                 )}
                 {(data.meWeekday.length > 0 || data.meWeekend.length > 0) && (
                   <div>
-                    <span className="text-[9px] text-stone-400 block mb-1">
+                    <span className="mb-1 block text-[9px] text-stone-400">
                       접속
                     </span>
                     {data.meWeekday.length > 0 && (
                       <div className="mb-[3px]">
-                        <span className="text-[8px] text-violet-500 mr-1">
+                        <span className="mr-1 text-[8px] text-violet-500">
                           평일
                         </span>
                         <span className="text-[9px] text-stone-600">
@@ -60,7 +60,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                     )}
                     {data.meWeekend.length > 0 && (
                       <div>
-                        <span className="text-[8px] text-violet-500 mr-1">
+                        <span className="mr-1 text-[8px] text-violet-500">
                           주말
                         </span>
                         <span className="text-[9px] text-stone-600">
@@ -71,7 +71,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                   </div>
                 )}
                 {data.meTimeMemo && (
-                  <div className="text-[9px] text-stone-500 leading-[1.6] italic mt-0.5">
+                  <div className="mt-0.5 text-[9px] leading-[1.6] text-stone-500 italic">
                     {data.meTimeMemo}
                   </div>
                 )}
@@ -82,31 +82,29 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
           </div>
 
           {/* YOU */}
-          <div className="pl-4 border-l border-stone-200">
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2 text-right">
+          <div className="border-l border-stone-200 pl-4">
+            <div className="mb-2 text-right text-[9px] font-semibold tracking-[0.2em] text-violet-500 uppercase">
               YOU
             </div>
-            <div className="flex flex-col gap-1.5 items-end">
-              <div className="flex items-center gap-1.5 justify-end">
+            <div className="flex flex-col items-end gap-1.5">
+              <div className="flex items-center justify-end gap-1.5">
                 <Pill>{youGenderDisplay || "무관"}</Pill>
-                <span className="text-[9px] text-stone-400 min-w-[26px] text-right">
+                <span className="min-w-[26px] text-right text-[9px] text-stone-400">
                   성별
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 justify-end">
+              <div className="flex items-center justify-end gap-1.5">
                 <Pill>{data.youAge || "무관"}</Pill>
-                <span className="text-[9px] text-stone-400 min-w-[26px] text-right">
+                <span className="min-w-[26px] text-right text-[9px] text-stone-400">
                   나이
                 </span>
               </div>
               <div className="text-right">
-                <span className="text-[9px] text-stone-400 block mb-1">
+                <span className="mb-1 block text-[9px] text-stone-400">
                   접속
                 </span>
                 <div className="mb-[3px]">
-                  <span className="text-[8px] text-violet-500 ml-1">
-                    평일
-                  </span>
+                  <span className="ml-1 text-[8px] text-violet-500">평일</span>
                   <div className="text-[9px] text-stone-600">
                     {data.youWeekdayAny
                       ? "무관"
@@ -116,9 +114,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                   </div>
                 </div>
                 <div>
-                  <span className="text-[8px] text-violet-500 ml-1">
-                    주말
-                  </span>
+                  <span className="ml-1 text-[8px] text-violet-500">주말</span>
                   <div className="text-[9px] text-stone-600">
                     {data.youWeekendAny
                       ? "무관"
@@ -129,7 +125,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                 </div>
               </div>
               {data.youTimeMemo && (
-                <div className="text-[9px] text-stone-500 leading-[1.6] italic text-right mt-0.5">
+                <div className="mt-0.5 text-right text-[9px] leading-[1.6] text-stone-500 italic">
                   {data.youTimeMemo}
                 </div>
               )}

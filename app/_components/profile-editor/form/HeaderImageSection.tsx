@@ -13,21 +13,19 @@ export const HeaderImageSection: React.FC<Props> = ({
   setHeaderImage,
   handleHeaderUpload,
 }) => (
-  <div className="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden">
+  <div className="overflow-hidden rounded-2xl border border-stone-100 bg-white shadow-sm">
     {!headerImage ? (
       <button
         type="button"
-        onClick={() =>
-          document.getElementById("header-img-upload")?.click()
-        }
-        className="w-full aspect-[3/1] flex flex-col items-center justify-center gap-2 bg-stone-50 hover:bg-stone-100 transition-colors text-stone-300"
+        onClick={() => document.getElementById("header-img-upload")?.click()}
+        className="flex aspect-[3/1] w-full flex-col items-center justify-center gap-2 bg-stone-50 text-stone-300 transition-colors hover:bg-stone-100"
       >
         <Upload className="h-5 w-5" />
         <span className="text-[11px] tracking-wide">대표 이미지 업로드</span>
       </button>
     ) : (
       <div className="relative">
-        <div className="relative w-full aspect-[3/1] overflow-hidden bg-stone-100">
+        <div className="relative aspect-[3/1] w-full overflow-hidden bg-stone-100">
           <Image
             src={headerImage}
             alt="대표 이미지"
@@ -37,7 +35,7 @@ export const HeaderImageSection: React.FC<Props> = ({
         </div>
         <button
           onClick={() => setHeaderImage(null)}
-          className="absolute top-2 right-2 bg-black/40 hover:bg-black/60 text-white rounded-full p-1.5 transition-colors"
+          className="absolute top-2 right-2 rounded-full bg-black/40 p-1.5 text-white transition-colors hover:bg-black/60"
         >
           <X className="h-3.5 w-3.5" />
         </button>

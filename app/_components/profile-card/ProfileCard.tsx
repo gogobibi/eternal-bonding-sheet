@@ -16,7 +16,7 @@ export const ProfileCard = React.forwardRef<
 >(({ data }, ref) => (
   <div
     ref={ref}
-    className="w-[390px] bg-[#FAFAF7] font-sans text-stone-800 overflow-hidden"
+    className="w-[390px] overflow-hidden bg-[#FAFAF7] font-sans text-stone-800"
   >
     <CardHeader headerImage={data.headerImage} />
     <div className="px-6 pt-7 pb-5">

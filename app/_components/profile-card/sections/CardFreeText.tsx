@@ -7,7 +7,7 @@ export const CardFreeText: React.FC<{ freeText: string }> = ({ freeText }) => {
   return (
     <div className="mb-6">
       <SectionBlock title="그 외">
-        <div className="text-[10px] text-stone-600 leading-[1.9] whitespace-pre-wrap">
+        <div className="text-[10px] leading-[1.9] whitespace-pre-wrap text-stone-600">
           {freeText}
         </div>
       </SectionBlock>

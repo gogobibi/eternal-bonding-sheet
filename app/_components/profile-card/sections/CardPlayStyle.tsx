@@ -19,12 +19,12 @@ export const CardPlayStyle: React.FC<{ playStyles: PlayStyleItem[] }> = ({
                 key={item.id}
                 className={`flex items-start gap-2 ${
                   item.emphasized
-                    ? "px-2.5 py-[5px] bg-amber-100 rounded-lg border border-amber-200"
+                    ? "rounded-lg border border-amber-200 bg-amber-100 px-2.5 py-[5px]"
                     : "px-0 py-[3px]"
                 }`}
               >
                 <span
-                  className={`text-[11px] shrink-0 mt-px leading-[1.6] ${
+                  className={`mt-px shrink-0 text-[11px] leading-[1.6] ${
                     item.emphasized ? "text-amber-500" : "text-stone-300"
                   }`}
                 >
@@ -33,7 +33,7 @@ export const CardPlayStyle: React.FC<{ playStyles: PlayStyleItem[] }> = ({
                 <span
                   className={`text-[11px] leading-[1.7] ${
                     item.emphasized
-                      ? "text-stone-800 font-medium"
+                      ? "font-medium text-stone-800"
                       : "text-stone-600"
                   }`}
                 >

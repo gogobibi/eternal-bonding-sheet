@@ -5,11 +5,11 @@ export const SectionBlock: React.FC<{
   children: React.ReactNode;
 }> = ({ title, children }) => (
   <div>
-    <div className="flex items-center gap-2 mb-3.5">
-      <span className="text-[9px] tracking-[0.22em] uppercase text-stone-400 font-medium whitespace-nowrap">
+    <div className="mb-3.5 flex items-center gap-2">
+      <span className="text-[9px] font-medium tracking-[0.22em] whitespace-nowrap text-stone-400 uppercase">
         {title}
       </span>
-      <div className="flex-1 h-px bg-stone-200" />
+      <div className="h-px flex-1 bg-stone-200" />
     </div>
     {children}
   </div>

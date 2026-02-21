@@ -8,10 +8,10 @@ export const Chip: React.FC<{
   <button
     type="button"
     onClick={onClick}
-    className={`px-2.5 py-1 rounded-full text-[11px] border transition-all leading-none ${
+    className={`rounded-full border px-2.5 py-1 text-[11px] leading-none transition-all ${
       selected
-        ? "bg-violet-50 border-violet-300 text-violet-700"
-        : "bg-stone-50 border-stone-200 text-stone-400 hover:border-stone-300 hover:text-stone-600"
+        ? "border-violet-300 bg-violet-50 text-violet-700"
+        : "border-stone-200 bg-stone-50 text-stone-400 hover:border-stone-300 hover:text-stone-600"
     }`}
   >
     {label}

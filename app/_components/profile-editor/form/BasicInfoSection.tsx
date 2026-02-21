@@ -56,7 +56,7 @@ export const BasicInfoSection: React.FC<Props> = ({
   basicYou,
 }) => (
   <SectionCard title="기본 정보">
-    <div className="grid grid-cols-2 gap-3 mb-5">
+    <div className="mb-5 grid grid-cols-2 gap-3">
       <div>
         <Mini>닉네임 (최대 9자)</Mini>
         <FieldInput
@@ -70,7 +70,7 @@ export const BasicInfoSection: React.FC<Props> = ({
         <select
           value={basic.server}
           onChange={(e) => basic.setServer(e.target.value)}
-          className="w-full px-3 py-2 text-xs border border-stone-200 rounded-lg bg-stone-50 text-stone-600 focus:outline-none focus:border-violet-300 transition-colors appearance-none"
+          className="w-full appearance-none rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-xs text-stone-600 transition-colors focus:border-violet-300 focus:outline-none"
         >
           <option value="">서버 선택</option>
           {SERVERS.map((s) => (
@@ -85,7 +85,7 @@ export const BasicInfoSection: React.FC<Props> = ({
     {/* ME / YOU */}
     <div className="grid grid-cols-2 border-t border-stone-100 pt-4">
       {/* ME */}
-      <div className="pr-4 space-y-3.5 border-r border-stone-100">
+      <div className="space-y-3.5 border-r border-stone-100 pr-4">
         <MeLabel />
         <div>
           <Mini>성별</Mini>
@@ -106,7 +106,7 @@ export const BasicInfoSection: React.FC<Props> = ({
               value={basicMe.meGenderCustom}
               onChange={(e) => basicMe.setMeGenderCustom(e.target.value)}
               placeholder="직접 입력"
-              className="mt-1.5 w-full px-2 py-1 text-[10px] border border-stone-200 rounded-lg bg-stone-50 focus:outline-none focus:border-violet-300"
+              className="mt-1.5 w-full rounded-lg border border-stone-200 bg-stone-50 px-2 py-1 text-[10px] focus:border-violet-300 focus:outline-none"
             />
           )}
         </div>
@@ -115,7 +115,7 @@ export const BasicInfoSection: React.FC<Props> = ({
           <select
             value={basicMe.meAge}
             onChange={(e) => basicMe.setMeAge(e.target.value)}
-            className="w-full px-2 py-1.5 text-[10px] border border-stone-200 rounded-lg bg-stone-50 text-stone-600 focus:outline-none focus:border-violet-300 appearance-none"
+            className="w-full appearance-none rounded-lg border border-stone-200 bg-stone-50 px-2 py-1.5 text-[10px] text-stone-600 focus:border-violet-300 focus:outline-none"
           >
             <option value="">선택</option>
             {AGE_OPTIONS.map((a) => (
@@ -129,7 +129,7 @@ export const BasicInfoSection: React.FC<Props> = ({
           <Mini>접속 시간</Mini>
           <div className="space-y-2">
             <div>
-              <p className="text-[9px] text-stone-300 mb-1">평일</p>
+              <p className="mb-1 text-[9px] text-stone-300">평일</p>
               <div className="flex flex-wrap gap-1">
                 {TIME_SLOTS.map((t) => (
                   <TimeChip
@@ -144,7 +144,7 @@ export const BasicInfoSection: React.FC<Props> = ({
               </div>
             </div>
             <div>
-              <p className="text-[9px] text-stone-300 mb-1">주말</p>
+              <p className="mb-1 text-[9px] text-stone-300">주말</p>
               <div className="flex flex-wrap gap-1">
                 {TIME_SLOTS.map((t) => (
                   <TimeChip
@@ -169,11 +169,11 @@ export const BasicInfoSection: React.FC<Props> = ({
       </div>
 
       {/* YOU */}
-      <div className="pl-4 space-y-3.5">
+      <div className="space-y-3.5 pl-4">
         <MeLabel right />
         <div>
           <Mini right>성별</Mini>
-          <div className="flex flex-wrap gap-1 justify-end">
+          <div className="flex flex-wrap justify-end gap-1">
             {["남", "여", "직접기입", "무관"].map((g) => (
               <Chip
                 key={g}
@@ -188,7 +188,7 @@ export const BasicInfoSection: React.FC<Props> = ({
               value={basicYou.youGenderCustom}
               onChange={(e) => basicYou.setYouGenderCustom(e.target.value)}
               placeholder="직접 입력"
-              className="mt-1.5 w-full px-2 py-1 text-[10px] border border-stone-200 rounded-lg bg-stone-50 focus:outline-none focus:border-violet-300 text-right"
+              className="mt-1.5 w-full rounded-lg border border-stone-200 bg-stone-50 px-2 py-1 text-right text-[10px] focus:border-violet-300 focus:outline-none"
             />
           )}
         </div>
@@ -197,7 +197,7 @@ export const BasicInfoSection: React.FC<Props> = ({
           <select
             value={basicYou.youAge}
             onChange={(e) => basicYou.setYouAge(e.target.value)}
-            className="w-full px-2 py-1.5 text-[10px] border border-stone-200 rounded-lg bg-stone-50 text-stone-600 focus:outline-none focus:border-violet-300 appearance-none text-right"
+            className="w-full appearance-none rounded-lg border border-stone-200 bg-stone-50 px-2 py-1.5 text-right text-[10px] text-stone-600 focus:border-violet-300 focus:outline-none"
           >
             <option value="무관">무관</option>
             {AGE_OPTIONS.map((a) => (
@@ -211,18 +211,18 @@ export const BasicInfoSection: React.FC<Props> = ({
           <Mini right>접속 시간</Mini>
           <div className="space-y-2">
             <div>
-              <div className="flex items-center justify-between mb-1">
+              <div className="mb-1 flex items-center justify-between">
                 <p className="text-[9px] text-stone-300">평일</p>
                 <button
                   type="button"
                   onClick={() => basicYou.setYouWeekdayAny((p) => !p)}
-                  className={`text-[9px] px-1.5 py-0.5 rounded border transition-all ${basicYou.youWeekdayAny ? "bg-stone-200 border-stone-300 text-stone-500" : "bg-stone-50 border-stone-200 text-stone-400"}`}
+                  className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${basicYou.youWeekdayAny ? "border-stone-300 bg-stone-200 text-stone-500" : "border-stone-200 bg-stone-50 text-stone-400"}`}
                 >
                   무관
                 </button>
               </div>
               {!basicYou.youWeekdayAny && (
-                <div className="flex flex-wrap gap-1 justify-end">
+                <div className="flex flex-wrap justify-end gap-1">
                   {TIME_SLOTS.map((t) => (
                     <TimeChip
                       key={t}
@@ -237,18 +237,18 @@ export const BasicInfoSection: React.FC<Props> = ({
               )}
             </div>
             <div>
-              <div className="flex items-center justify-between mb-1">
+              <div className="mb-1 flex items-center justify-between">
                 <p className="text-[9px] text-stone-300">주말</p>
                 <button
                   type="button"
                   onClick={() => basicYou.setYouWeekendAny((p) => !p)}
-                  className={`text-[9px] px-1.5 py-0.5 rounded border transition-all ${basicYou.youWeekendAny ? "bg-stone-200 border-stone-300 text-stone-500" : "bg-stone-50 border-stone-200 text-stone-400"}`}
+                  className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${basicYou.youWeekendAny ? "border-stone-300 bg-stone-200 text-stone-500" : "border-stone-200 bg-stone-50 text-stone-400"}`}
                 >
                   무관
                 </button>
               </div>
               {!basicYou.youWeekendAny && (
-                <div className="flex flex-wrap gap-1 justify-end">
+                <div className="flex flex-wrap justify-end gap-1">
                   {TIME_SLOTS.map((t) => (
                     <TimeChip
                       key={t}

@@ -32,8 +32,8 @@ export const CharacterSection: React.FC<Props> = ({
   handleCharUpload,
 }) => (
   <SectionCard title="커마 (캐릭터)">
-    <div className="flex items-center gap-2 mb-4 pb-4 border-b border-stone-100">
-      <p className="text-[10px] text-stone-400 mr-1">표시 방식</p>
+    <div className="mb-4 flex items-center gap-2 border-b border-stone-100 pb-4">
+      <p className="mr-1 text-[10px] text-stone-400">표시 방식</p>
       <OptionBtn
         label="이미지만"
         size="sm"
@@ -51,10 +51,8 @@ export const CharacterSection: React.FC<Props> = ({
       <MeLabel />
       <button
         type="button"
-        onClick={() =>
-          document.getElementById("char-img-upload")?.click()
-        }
-        className="w-full py-3 border border-dashed border-stone-200 rounded-xl flex items-center justify-center gap-2 text-stone-400 hover:border-violet-300 hover:text-violet-400 transition-colors"
+        onClick={() => document.getElementById("char-img-upload")?.click()}
+        className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-stone-200 py-3 text-stone-400 transition-colors hover:border-violet-300 hover:text-violet-400"
       >
         <Upload className="h-4 w-4" />
         <span className="text-xs">이미지 추가</span>
@@ -73,7 +71,7 @@ export const CharacterSection: React.FC<Props> = ({
             {charImages.map((photo) => (
               <div
                 key={photo.id}
-                className="relative aspect-square bg-stone-100 rounded-xl overflow-hidden group"
+                className="group relative aspect-square overflow-hidden rounded-xl bg-stone-100"
               >
                 <Image
                   src={photo.imageUrl}
@@ -84,10 +82,10 @@ export const CharacterSection: React.FC<Props> = ({
                 <button
                   onClick={() =>
                     setCharImages((prev) =>
-                      prev.filter((p) => p.id !== photo.id),
+                      prev.filter((p) => p.id !== photo.id)
                     )
                   }
-                  className="absolute top-1.5 right-1.5 bg-black/40 hover:bg-black/60 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute top-1.5 right-1.5 rounded-full bg-black/40 p-1 text-white opacity-0 transition-opacity group-hover:opacity-100 hover:bg-black/60"
                 >
                   <X className="h-3 w-3" />
                 </button>
@@ -97,8 +95,8 @@ export const CharacterSection: React.FC<Props> = ({
         ) : (
           <div className="space-y-2">
             {charImages.map((photo) => (
-              <div key={photo.id} className="flex gap-3 items-start">
-                <div className="relative flex-shrink-0 w-20 h-20 bg-stone-100 rounded-xl overflow-hidden group">
+              <div key={photo.id} className="flex items-start gap-3">
+                <div className="group relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-stone-100">
                   <Image
                     src={photo.imageUrl}
                     alt="커마"
@@ -108,10 +106,10 @@ export const CharacterSection: React.FC<Props> = ({
                   <button
                     onClick={() =>
                       setCharImages((prev) =>
-                        prev.filter((p) => p.id !== photo.id),
+                        prev.filter((p) => p.id !== photo.id)
                       )
                     }
-                    className="absolute top-1 right-1 bg-black/40 hover:bg-black/60 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-1 right-1 rounded-full bg-black/40 p-0.5 text-white opacity-0 transition-opacity group-hover:opacity-100 hover:bg-black/60"
                   >
                     <X className="h-2.5 w-2.5" />
                   </button>
@@ -123,8 +121,8 @@ export const CharacterSection: React.FC<Props> = ({
                       prev.map((p) =>
                         p.id === photo.id
                           ? { ...p, description: e.target.value }
-                          : p,
-                      ),
+                          : p
+                      )
                     )
                   }
                   placeholder="설명 입력..."
@@ -145,7 +143,7 @@ export const CharacterSection: React.FC<Props> = ({
         />
       </div>
     </div>
-    <div className="border-t border-stone-100 mt-5 pt-4 space-y-2">
+    <div className="mt-5 space-y-2 border-t border-stone-100 pt-4">
       <MeLabel right />
       <Mini right>원하시는 커마 스타일이 있다면</Mini>
       <FieldTextarea

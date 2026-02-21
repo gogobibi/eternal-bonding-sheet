@@ -21,7 +21,7 @@ export function ProfileEditor() {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-6 items-start">
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[1fr_420px]">
         {/* LEFT: Form */}
         <div className="min-w-0 space-y-4">
           <HeaderImageSection {...form.header} />
@@ -51,13 +51,12 @@ export function ProfileEditor() {
       {/* Hidden Capture Target */}
       <div
         aria-hidden="true"
-        className="fixed -left-[9999px] top-0 w-[390px] -z-[9999] pointer-events-none"
+        className="pointer-events-none fixed top-0 -left-[9999px] -z-[9999] w-[390px]"
       >
         <div ref={captureRef}>
           <ProfileCard data={form.profileData} />
         </div>
       </div>
-
     </>
   );
 }

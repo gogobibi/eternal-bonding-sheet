@@ -58,16 +58,14 @@ export const ContentsSection: React.FC<Props> = ({
       <MeLabel />
       {CONTENT_GROUPS.map((group) => (
         <div key={group.label}>
-          <p className="text-[9px] text-stone-300 mb-1.5">{group.label}</p>
+          <p className="mb-1.5 text-[9px] text-stone-300">{group.label}</p>
           <div className="flex flex-wrap gap-1">
             {group.items.map((item) => (
               <Chip
                 key={item}
                 label={item}
                 selected={mySelected.includes(item)}
-                onClick={() =>
-                  setMySelected((prev) => toggleArr(prev, item))
-                }
+                onClick={() => setMySelected((prev) => toggleArr(prev, item))}
               />
             ))}
           </div>
@@ -75,12 +73,12 @@ export const ContentsSection: React.FC<Props> = ({
       ))}
       {myCustom.length > 0 && (
         <div>
-          <p className="text-[9px] text-stone-300 mb-1.5">추가 키워드</p>
+          <p className="mb-1.5 text-[9px] text-stone-300">추가 키워드</p>
           <div className="flex flex-wrap gap-1">
             {myCustom.map((kw) => (
               <span
                 key={kw}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] bg-violet-50 border border-violet-200 text-violet-700"
+                className="inline-flex items-center gap-1 rounded-full border border-violet-200 bg-violet-50 px-2.5 py-1 text-[11px] text-violet-700"
               >
                 {kw}
                 <button
@@ -107,7 +105,7 @@ export const ContentsSection: React.FC<Props> = ({
         <button
           type="button"
           onClick={addMyKeyword}
-          className="px-3 py-2 bg-violet-50 border border-violet-200 text-violet-600 rounded-lg hover:bg-violet-100 transition-colors flex items-center"
+          className="flex items-center rounded-lg border border-violet-200 bg-violet-50 px-3 py-2 text-violet-600 transition-colors hover:bg-violet-100"
         >
           <Plus className="h-3.5 w-3.5" />
         </button>
@@ -119,18 +117,18 @@ export const ContentsSection: React.FC<Props> = ({
         rows={2}
       />
     </div>
-    <div className="border-t border-stone-100 mt-5 pt-4 space-y-3">
+    <div className="mt-5 space-y-3 border-t border-stone-100 pt-4">
       <div className="flex items-center justify-between">
-        <div className="text-[10px] tracking-[0.22em] uppercase text-violet-400">
+        <div className="text-[10px] tracking-[0.22em] text-violet-400 uppercase">
           YOU
         </div>
         <button
           type="button"
           onClick={() => setYouContentsEnabled((p) => !p)}
-          className={`text-[10px] px-2.5 py-1 rounded-full border transition-all ${
+          className={`rounded-full border px-2.5 py-1 text-[10px] transition-all ${
             youContentsEnabled
-              ? "bg-violet-50 border-violet-300 text-violet-600"
-              : "bg-stone-50 border-stone-200 text-stone-400 hover:border-stone-300"
+              ? "border-violet-300 bg-violet-50 text-violet-600"
+              : "border-stone-200 bg-stone-50 text-stone-400 hover:border-stone-300"
           }`}
         >
           {youContentsEnabled ? "키워드 ON" : "키워드 OFF"}
@@ -140,10 +138,10 @@ export const ContentsSection: React.FC<Props> = ({
         <div className="space-y-3">
           {CONTENT_GROUPS.map((group) => (
             <div key={group.label}>
-              <p className="text-[9px] text-stone-300 mb-1.5 text-right">
+              <p className="mb-1.5 text-right text-[9px] text-stone-300">
                 {group.label}
               </p>
-              <div className="flex flex-wrap gap-1 justify-end">
+              <div className="flex flex-wrap justify-end gap-1">
                 {group.items.map((item) => (
                   <Chip
                     key={item}
@@ -158,11 +156,11 @@ export const ContentsSection: React.FC<Props> = ({
             </div>
           ))}
           {youCustom.length > 0 && (
-            <div className="flex flex-wrap gap-1 justify-end">
+            <div className="flex flex-wrap justify-end gap-1">
               {youCustom.map((kw) => (
                 <span
                   key={kw}
-                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] bg-violet-50 border border-violet-200 text-violet-700"
+                  className="inline-flex items-center gap-1 rounded-full border border-violet-200 bg-violet-50 px-2.5 py-1 text-[11px] text-violet-700"
                 >
                   {kw}
                   <button
@@ -188,7 +186,7 @@ export const ContentsSection: React.FC<Props> = ({
             <button
               type="button"
               onClick={addYouKeyword}
-              className="px-3 py-2 bg-violet-50 border border-violet-200 text-violet-600 rounded-lg hover:bg-violet-100 transition-colors flex items-center"
+              className="flex items-center rounded-lg border border-violet-200 bg-violet-50 px-3 py-2 text-violet-600 transition-colors hover:bg-violet-100"
             >
               <Plus className="h-3.5 w-3.5" />
             </button>

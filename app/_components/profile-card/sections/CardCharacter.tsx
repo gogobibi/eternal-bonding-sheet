@@ -13,7 +13,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
       <SectionBlock title="커마">
         {(data.charImages.length > 0 || data.charMemo) && (
           <div className={data.youCharMemo ? "mb-4" : ""}>
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2">
+            <div className="mb-2 text-[9px] font-semibold tracking-[0.2em] text-violet-500 uppercase">
               ME
             </div>
             {data.charImages.length > 0 &&
@@ -29,7 +29,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                       <img
                         src={photo.imageUrl}
                         alt="커마"
-                        className="w-full h-full object-cover block"
+                        className="block h-full w-full object-cover"
                       />
                     </div>
                   ))}
@@ -39,19 +39,16 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                   className={`flex flex-col gap-2 ${data.charMemo ? "mb-2.5" : ""}`}
                 >
                   {data.charImages.map((photo) => (
-                    <div
-                      key={photo.id}
-                      className="flex gap-2.5 items-start"
-                    >
-                      <div className="shrink-0 w-[72px] h-[72px] rounded-[10px] overflow-hidden bg-stone-200">
+                    <div key={photo.id} className="flex items-start gap-2.5">
+                      <div className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-[10px] bg-stone-200">
                         <img
                           src={photo.imageUrl}
                           alt="커마"
-                          className="w-full h-full object-cover block"
+                          className="block h-full w-full object-cover"
                         />
                       </div>
                       {photo.description && (
-                        <div className="flex-1 text-[10px] text-stone-600 leading-[1.7] pt-1">
+                        <div className="flex-1 pt-1 text-[10px] leading-[1.7] text-stone-600">
                           {photo.description}
                         </div>
                       )}
@@ -60,7 +57,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                 </div>
               ))}
             {data.charMemo && (
-              <div className="text-[10px] text-stone-600 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg whitespace-pre-wrap">
+              <div className="rounded-lg bg-stone-100 px-3 py-2 text-[10px] leading-[1.7] whitespace-pre-wrap text-stone-600">
                 {data.charMemo}
               </div>
             )}
@@ -68,10 +65,10 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
         )}
         {data.youCharMemo && (
           <div>
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2 text-right">
+            <div className="mb-2 text-right text-[9px] font-semibold tracking-[0.2em] text-violet-500 uppercase">
               YOU
             </div>
-            <div className="text-[10px] text-stone-600 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg text-right whitespace-pre-wrap">
+            <div className="rounded-lg bg-stone-100 px-3 py-2 text-right text-[10px] leading-[1.7] whitespace-pre-wrap text-stone-600">
               {data.youCharMemo}
             </div>
           </div>

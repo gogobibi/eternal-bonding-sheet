@@ -1,11 +1,4 @@
-export const TIME_SLOTS = [
-  "아침",
-  "오전",
-  "오후",
-  "저녁",
-  "밤",
-  "새벽",
-];
+export const TIME_SLOTS = ["아침", "오전", "오후", "저녁", "밤", "새벽"];
 
 export const AGE_OPTIONS = [
   "10대 전반",

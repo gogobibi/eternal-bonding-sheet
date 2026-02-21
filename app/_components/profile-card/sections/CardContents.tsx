@@ -23,7 +23,7 @@ export const CardContents: React.FC<{ data: ProfileData }> = ({ data }) => {
       <SectionBlock title="주 컨텐츠">
         {(myAllKeywords.length > 0 || data.myContentMemo) && (
           <div className={hasYouSection ? "mb-3.5" : ""}>
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2">
+            <div className="mb-2 text-[9px] font-semibold tracking-[0.2em] text-violet-500 uppercase">
               ME
             </div>
             {myAllKeywords.length > 0 && (
@@ -38,7 +38,7 @@ export const CardContents: React.FC<{ data: ProfileData }> = ({ data }) => {
               </div>
             )}
             {data.myContentMemo && (
-              <div className="text-[10px] text-stone-500 leading-[1.7] italic whitespace-pre-wrap">
+              <div className="text-[10px] leading-[1.7] whitespace-pre-wrap text-stone-500 italic">
                 {data.myContentMemo}
               </div>
             )}
@@ -46,12 +46,12 @@ export const CardContents: React.FC<{ data: ProfileData }> = ({ data }) => {
         )}
         {hasYouSection && (
           <div>
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2 text-right">
+            <div className="mb-2 text-right text-[9px] font-semibold tracking-[0.2em] text-violet-500 uppercase">
               YOU
             </div>
             {data.youContentsEnabled && youAllKeywords.length > 0 && (
               <div
-                className={`flex flex-wrap gap-1 justify-end ${data.youContentMemo ? "mb-2" : ""}`}
+                className={`flex flex-wrap justify-end gap-1 ${data.youContentMemo ? "mb-2" : ""}`}
               >
                 {youAllKeywords.map((kw) => (
                   <Pill key={kw} accent>
@@ -61,7 +61,7 @@ export const CardContents: React.FC<{ data: ProfileData }> = ({ data }) => {
               </div>
             )}
             {data.youContentMemo && (
-              <div className="text-[10px] text-stone-500 leading-[1.7] italic text-right whitespace-pre-wrap">
+              <div className="text-right text-[10px] leading-[1.7] whitespace-pre-wrap text-stone-500 italic">
                 {data.youContentMemo}
               </div>
             )}

@@ -2,7 +2,7 @@ import { useState, type RefObject } from "react";
 
 export function useImageGenerator(
   captureRef: RefObject<HTMLDivElement | null>,
-  nickname: string,
+  nickname: string
 ) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);

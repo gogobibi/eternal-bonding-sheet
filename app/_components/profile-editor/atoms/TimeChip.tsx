@@ -8,10 +8,10 @@ export const TimeChip: React.FC<{
   <button
     type="button"
     onClick={onClick}
-    className={`px-1.5 py-0.5 rounded text-[9px] border transition-all leading-none ${
+    className={`rounded border px-1.5 py-0.5 text-[9px] leading-none transition-all ${
       selected
-        ? "bg-violet-50 border-violet-300 text-violet-700"
-        : "bg-stone-50 border-stone-200 text-stone-400 hover:border-stone-300"
+        ? "border-violet-300 bg-violet-50 text-violet-700"
+        : "border-stone-200 bg-stone-50 text-stone-400 hover:border-stone-300"
     }`}
   >
     {label}

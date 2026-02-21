@@ -4,9 +4,9 @@ export const SectionCard: React.FC<{
   title: string;
   children: React.ReactNode;
 }> = ({ title, children }) => (
-  <div className="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden">
-    <div className="px-5 py-3 border-b border-stone-100 bg-stone-50/60">
-      <p className="text-[10px] tracking-[0.22em] uppercase text-stone-400">
+  <div className="overflow-hidden rounded-2xl border border-stone-100 bg-white shadow-sm">
+    <div className="border-b border-stone-100 bg-stone-50/60 px-5 py-3">
+      <p className="text-[10px] tracking-[0.22em] text-stone-400 uppercase">
         {title}
       </p>
     </div>

@@ -6,7 +6,7 @@ export const Pill: React.FC<{
   size?: "sm" | "md";
 }> = ({ children, accent, size = "md" }) => (
   <span
-    className={`inline-block rounded-full leading-[1.7] border ${
+    className={`inline-block rounded-full border leading-[1.7] ${
       size === "sm" ? "px-1.5 py-px text-[9px]" : "px-2 py-0.5 text-[10px]"
     } ${
       accent

@@ -44,5 +44,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-family:
+    var(--font-sans),
+    "Noto Sans KR",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    sans-serif;
 }

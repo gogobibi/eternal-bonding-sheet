@@ -20,26 +20,24 @@ export const PreviewPanel: React.FC<Props> = ({
   handleGenerate,
   handleDownload,
 }) => (
-  <div className="lg:sticky lg:top-6 space-y-3">
+  <div className="space-y-3 lg:sticky lg:top-6">
     {/* Preview Panel */}
-    <div className="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden">
+    <div className="overflow-hidden rounded-2xl border border-stone-100 bg-white shadow-sm">
       {/* Panel Header */}
-      <div className="px-5 py-3.5 border-b border-stone-100 bg-stone-50/60 flex items-center gap-2">
+      <div className="flex items-center gap-2 border-b border-stone-100 bg-stone-50/60 px-5 py-3.5">
         <Eye className="h-3.5 w-3.5 text-stone-400" />
-        <p className="text-[10px] tracking-[0.22em] uppercase text-stone-400 flex-1">
+        <p className="flex-1 text-[10px] tracking-[0.22em] text-stone-400 uppercase">
           실시간 미리보기
         </p>
         {nickname && (
-          <span className="text-[10px] text-violet-500 bg-violet-50 border border-violet-100 px-2 py-0.5 rounded-full">
+          <span className="rounded-full border border-violet-100 bg-violet-50 px-2 py-0.5 text-[10px] text-violet-500">
             {nickname}
           </span>
         )}
       </div>
 
       {/* Live ProfileCard */}
-      <div
-        className="overflow-y-auto overflow-x-auto max-h-[calc(100vh-220px)]"
-      >
+      <div className="max-h-[calc(100vh-220px)] overflow-x-auto overflow-y-auto">
         <ProfileCard data={profileData} />
       </div>
     </div>
@@ -49,7 +47,7 @@ export const PreviewPanel: React.FC<Props> = ({
       type="button"
       onClick={handleGenerate}
       disabled={isGenerating}
-      className="w-full py-4 bg-violet-600 hover:bg-violet-700 active:bg-violet-800 disabled:bg-violet-300 text-white rounded-2xl shadow-sm shadow-violet-100 flex items-center justify-center gap-2.5 transition-all"
+      className="flex w-full items-center justify-center gap-2.5 rounded-2xl bg-violet-600 py-4 text-white shadow-sm shadow-violet-100 transition-all hover:bg-violet-700 active:bg-violet-800 disabled:bg-violet-300"
     >
       {isGenerating ? (
         <>

@@ -5,7 +5,7 @@ export const Mini: React.FC<{
   right?: boolean;
 }> = ({ children, right }) => (
   <p
-    className={`text-[10px] text-stone-400 mb-1.5 ${right ? "text-right" : ""}`}
+    className={`mb-1.5 text-[10px] text-stone-400 ${right ? "text-right" : ""}`}
   >
     {children}
   </p>

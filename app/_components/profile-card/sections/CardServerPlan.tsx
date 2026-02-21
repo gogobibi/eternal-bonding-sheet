@@ -40,7 +40,7 @@ export const CardServerPlan: React.FC<{ data: ProfileData }> = ({ data }) => {
             </div>
           )}
           {data.serverPlanDesc && (
-            <div className="text-[10px] text-stone-600 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg whitespace-pre-wrap">
+            <div className="rounded-lg bg-stone-100 px-3 py-2 text-[10px] leading-[1.7] whitespace-pre-wrap text-stone-600">
               {data.serverPlanDesc}
             </div>
           )}
