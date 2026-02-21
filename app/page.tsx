@@ -10,10 +10,10 @@ export default function Home() {
             Final Fantasy XIV
           </p>
           <h1 className="text-stone-700 text-[1.3rem] font-medium tracking-[0.05em]">
-            언약 프로필
+            언약 시트 생성기
           </h1>
           <p className="text-[11px] text-stone-400 mt-1.5">
-            나만의 프로필을 만들어보세요
+            간단히 정보를 입력하여 언약 시트를 생성하세요
           </p>
         </div>
 
