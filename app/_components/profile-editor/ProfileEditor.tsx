@@ -12,12 +12,11 @@ import { PlayStyleSection } from "./form/PlayStyleSection";
 import { ServerPlanSection } from "./form/ServerPlanSection";
 import { FreeTextSection } from "./form/FreeTextSection";
 import { PreviewPanel } from "./preview/PreviewPanel";
-import { PreviewModal } from "./preview/PreviewModal";
 
 export function ProfileEditor() {
   const captureRef = useRef<HTMLDivElement>(null);
   const form = useProfileForm();
-  const { isGenerating, previewUrl, setPreviewUrl, handleGenerate, handleDownload } =
+  const { isGenerating, previewUrl, handleGenerate, handleDownload } =
     useImageGenerator(captureRef, form.profileData.nickname);
 
   return (
@@ -59,14 +58,6 @@ export function ProfileEditor() {
         </div>
       </div>
 
-      {/* Preview Modal */}
-      {previewUrl && (
-        <PreviewModal
-          previewUrl={previewUrl}
-          onClose={() => setPreviewUrl(null)}
-          onDownload={handleDownload}
-        />
-      )}
     </>
   );
 }

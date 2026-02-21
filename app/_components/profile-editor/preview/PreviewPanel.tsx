@@ -63,17 +63,5 @@ export const PreviewPanel: React.FC<Props> = ({
         </>
       )}
     </button>
-
-    {/* Download button (shows after generation) */}
-    {previewUrl && (
-      <button
-        type="button"
-        onClick={handleDownload}
-        className="w-full py-3.5 bg-white hover:bg-stone-50 border border-stone-200 text-stone-600 rounded-2xl flex items-center justify-center gap-2 transition-all"
-      >
-        <Download className="h-4 w-4" />
-        <span className="text-sm">PNG 다운로드</span>
-      </button>
-    )}
   </div>
 );
