@@ -1,3 +1,11 @@
+export type CouplingType = "BL" | "GL" | "HL";
+
+export type RaceType =
+  | "남라펠" | "여라펠" | "여코테" | "남코테"
+  | "남중휴" | "남고휴" | "여중휴" | "여고휴"
+  | "남레젠" | "여레젠" | "남비에라" | "여비에라"
+  | "남로스갈" | "여로스갈" | "남루가딘" | "여루가딘";
+
 export interface PhotoItem {
   id: string;
   imageUrl: string;
@@ -36,6 +44,9 @@ export interface ProfileData {
   charImages: PhotoItem[];
   charMemo: string;
   youCharMemo: string;
+  couplingPriority: CouplingType[][];
+  meRace: RaceType[];
+  youRace: RaceType[];
   // Contents
   mySelected: string[];
   myCustom: string[];

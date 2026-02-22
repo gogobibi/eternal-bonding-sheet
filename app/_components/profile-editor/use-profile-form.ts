@@ -1,5 +1,6 @@
 import { useState } from "react";
-import type { ProfileData, PhotoItem, PlayStyleItem } from "./types";
+import type { ProfileData, PhotoItem, PlayStyleItem, CouplingType, RaceType } from "./types";
+import { toggleTypeTier } from "./helpers";
 
 export function useProfileForm() {
   // Display option
@@ -37,6 +38,9 @@ export function useProfileForm() {
   const [charImages, setCharImages] = useState<PhotoItem[]>([]);
   const [charMemo, setCharMemo] = useState("");
   const [youCharMemo, setYouCharMemo] = useState("");
+  const [couplingPriority, setCouplingPriority] = useState<CouplingType[][]>([[], [], []]);
+  const [meRace, setMeRace] = useState<RaceType[]>([]);
+  const [youRace, setYouRace] = useState<RaceType[]>([]);
 
   // 4. Main contents
   const [mySelected, setMySelected] = useState<string[]>([]);
@@ -87,6 +91,9 @@ export function useProfileForm() {
     charImages,
     charMemo,
     youCharMemo,
+    couplingPriority,
+    meRace,
+    youRace,
     mySelected,
     myCustom,
     myContentMemo,
@@ -141,6 +148,9 @@ export function useProfileForm() {
     });
     e.target.value = "";
   };
+
+  const handleCouplingClick = (type: CouplingType, tierIndex: number) =>
+    setCouplingPriority((prev) => toggleTypeTier(type, tierIndex, prev));
 
   const addPlayStyle = () =>
     setPlayStyles((prev) => [
@@ -200,6 +210,10 @@ export function useProfileForm() {
       charMemo, setCharMemo,
       youCharMemo, setYouCharMemo,
       handleCharUpload,
+      couplingPriority,
+      onCouplingClick: handleCouplingClick,
+      meRace, setMeRace,
+      youRace, setYouRace,
     },
     contents: {
       mySelected, setMySelected,
