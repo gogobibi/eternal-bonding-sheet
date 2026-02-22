@@ -49,16 +49,20 @@ export const CharacterSection: React.FC<Props> = ({
     </div>
     <div className="space-y-3">
       <MeLabel />
-      <button
-        type="button"
-        onClick={() =>
-          document.getElementById("char-img-upload")?.click()
-        }
-        className="w-full py-3 border border-dashed border-stone-200 rounded-xl flex items-center justify-center gap-2 text-stone-400 hover:border-violet-300 hover:text-violet-400 transition-colors"
-      >
-        <Upload className="h-4 w-4" />
-        <span className="text-xs">이미지 추가</span>
-      </button>
+      {charImages.length < 10 ? (
+        <button
+          type="button"
+          onClick={() => document.getElementById("char-img-upload")?.click()}
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-stone-200 py-3 text-stone-400 transition-colors hover:border-violet-300 hover:text-violet-400"
+        >
+          <Upload className="h-4 w-4" />
+          <span className="text-xs">이미지 추가 ({charImages.length}/10)</span>
+        </button>
+      ) : (
+        <div className="flex w-full items-center justify-center rounded-xl border border-dashed border-stone-200 py-3 text-stone-300">
+          <span className="text-xs">최대 10장까지 등록 가능합니다</span>
+        </div>
+      )}
       <input
         id="char-img-upload"
         type="file"

@@ -112,20 +112,30 @@ export function useProfileForm() {
     e.target.value = "";
   };
 
+  const MAX_CHAR_IMAGES = 10;
+  const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10MB
+
   const handleCharUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
     Array.from(files).forEach((file) => {
+      if (file.size > MAX_FILE_BYTES) {
+        alert(`${file.name}\n파일 크기가 너무 큽니다 (최대 10MB).\n더 작은 이미지를 업로드해 주세요.`);
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (ev) => {
-        setCharImages((prev) => [
-          ...prev,
-          {
-            id: Date.now().toString() + Math.random(),
-            imageUrl: ev.target?.result as string,
-            description: "",
-          },
-        ]);
+        setCharImages((prev) => {
+          if (prev.length >= MAX_CHAR_IMAGES) return prev;
+          return [
+            ...prev,
+            {
+              id: Date.now().toString() + Math.random(),
+              imageUrl: ev.target?.result as string,
+              description: "",
+            },
+          ];
+        });
       };
       reader.readAsDataURL(file);
     });
