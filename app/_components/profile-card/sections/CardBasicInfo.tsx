@@ -25,7 +25,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
             <div className="flex flex-col gap-1.5">
               {meGenderDisplay && (
                 <div className="flex items-center gap-1.5">
-                  <span className="min-w-[26px] text-[9px] text-stone-400">
+                  <span className="min-w-[26px] text-[9px] text-stone-500">
                     성별
                   </span>
                   <Pill>{meGenderDisplay}</Pill>
@@ -33,7 +33,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
               )}
               {data.meAge && (
                 <div className="flex items-center gap-1.5">
-                  <span className="min-w-[26px] text-[9px] text-stone-400">
+                  <span className="min-w-[26px] text-[9px] text-stone-500">
                     나이
                   </span>
                   <Pill size="sm">{data.meAge}</Pill>
@@ -41,25 +41,25 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
               )}
               {(data.meWeekday.length > 0 || data.meWeekend.length > 0) && (
                 <div>
-                  <span className="block text-[9px] text-stone-400">
+                  <span className="block text-[9px] text-stone-500">
                     접속 시간
                   </span>
                   {data.meWeekday.length > 0 && (
                     <div className="mb-[3px]">
-                      <span className="mr-1 text-[8px] text-stone-400">
+                      <span className="mr-1 text-[8px] text-stone-500">
                         평일
                       </span>
-                      <div className="text-[9px] text-stone-600">
+                      <div className="text-[9px] text-stone-700">
                         {sortByTimeSlot(data.meWeekday).join(" · ")}
                       </div>
                     </div>
                   )}
                   {data.meWeekend.length > 0 && (
                     <div>
-                      <span className="mr-1 text-[8px] text-stone-400">
+                      <span className="mr-1 text-[8px] text-stone-500">
                         주말
                       </span>
-                      <div className="text-[9px] text-stone-600">
+                      <div className="text-[9px] text-stone-700">
                         {sortByTimeSlot(data.meWeekend).join(" · ")}
                       </div>
                     </div>
@@ -67,7 +67,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                 </div>
               )}
               {data.meTimeMemo && (
-                <div className="mt-0.5 text-[9px] leading-[1.6] text-stone-500 italic">
+                <div className="mt-0.5 text-[9px] leading-[1.6] text-stone-600 italic">
                   {data.meTimeMemo}
                 </div>
               )}
@@ -83,7 +83,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
               {youGenderDisplay && (
                 <div className="flex items-center justify-end gap-1.5">
                   <Pill>{youGenderDisplay}</Pill>
-                  <span className="min-w-[26px] text-right text-[9px] text-stone-400">
+                  <span className="min-w-[26px] text-right text-[9px] text-stone-500">
                     성별
                   </span>
                 </div>
@@ -97,7 +97,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                       </Pill>
                     ))}
                   </div>
-                  <span className="min-w-[26px] shrink-0 text-right text-[9px] text-stone-400">
+                  <span className="min-w-[26px] shrink-0 text-right text-[9px] text-stone-500">
                     나이
                   </span>
                 </div>
@@ -107,15 +107,15 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                 data.youWeekendAny ||
                 data.youWeekend.length > 0) && (
                 <div className="text-right">
-                  <span className="block text-[9px] text-stone-400">
+                  <span className="block text-[9px] text-stone-500">
                     접속 시간
                   </span>
                   {(data.youWeekdayAny || data.youWeekday.length > 0) && (
                     <div className="mb-[3px]">
-                      <span className="ml-1 text-[8px] text-stone-400">
+                      <span className="ml-1 text-[8px] text-stone-500">
                         평일
                       </span>
-                      <div className="text-[9px] text-stone-600">
+                      <div className="text-[9px] text-stone-700">
                         {data.youWeekdayAny
                           ? "무관"
                           : sortByTimeSlot(data.youWeekday).join(" · ")}
@@ -124,10 +124,10 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                   )}
                   {(data.youWeekendAny || data.youWeekend.length > 0) && (
                     <div>
-                      <span className="ml-1 text-[8px] text-stone-400">
+                      <span className="ml-1 text-[8px] text-stone-500">
                         주말
                       </span>
-                      <div className="text-[9px] text-stone-600">
+                      <div className="text-[9px] text-stone-700">
                         {data.youWeekendAny
                           ? "무관"
                           : sortByTimeSlot(data.youWeekend).join(" · ")}
@@ -137,7 +137,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                 </div>
               )}
               {data.youTimeMemo && (
-                <div className="text-[9px] text-stone-500 leading-[1.6] italic text-right mt-0.5">
+                <div className="text-[9px] text-stone-600 leading-[1.6] italic text-right mt-0.5">
                   {data.youTimeMemo}
                 </div>
               )}

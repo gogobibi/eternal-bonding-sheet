@@ -61,7 +61,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                         />
                       </div>
                       {photo.description && (
-                        <div className="flex-1 text-[10px] text-stone-600 leading-[1.7] pt-1">
+                        <div className="flex-1 text-[10px] text-stone-700 leading-[1.7] pt-1">
                           {photo.description}
                         </div>
                       )}
@@ -86,7 +86,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                           ? "bg-sky-100 text-sky-600 font-semibold"
                           : r === "환상약X"
                             ? "bg-rose-100 text-rose-500 font-semibold"
-                            : "bg-stone-100 text-stone-500 font-medium"
+                            : "bg-stone-100 text-stone-600 font-medium"
                       }`}
                     >
                       {r}
@@ -97,7 +97,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
 
             {data.couplingPriority.some((tier) => tier.length > 0) && (
               <div>
-                <div className="mx-1 flex items-center text-[9px] text-stone-400">
+                <div className="mx-1 flex items-center text-[9px] text-stone-500">
                   선호 커플링
                 </div>
                 <div className="flex flex-wrap items-center gap-1 mt-2 mb-2">
@@ -107,7 +107,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                       part === " > " || part === " = " ? (
                         <span
                           key={i}
-                          className="text-[9px] text-stone-400 font-medium"
+                          className="text-[9px] text-stone-500 font-medium"
                         >
                           {part.trim()}
                         </span>
@@ -125,7 +125,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
             )}
 
             {data.charMemo && (
-              <div className="text-[10px] text-stone-600 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg whitespace-pre-wrap">
+              <div className="text-[10px] text-stone-700 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg whitespace-pre-wrap">
                 {data.charMemo}
               </div>
             )}
@@ -153,7 +153,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                           ? "bg-sky-100 text-sky-600 font-semibold"
                           : r === "환상약X"
                             ? "bg-rose-100 text-rose-500 font-semibold"
-                            : "bg-stone-100 text-stone-500 font-medium"
+                            : "bg-stone-100 text-stone-600 font-medium"
                       }`}
                     >
                       {r}
@@ -162,7 +162,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
               </div>
             )}
             {data.youCharMemo && (
-              <div className="text-[10px] text-stone-600 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg text-right whitespace-pre-wrap">
+              <div className="text-[10px] text-stone-700 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg text-right whitespace-pre-wrap">
                 {data.youCharMemo}
               </div>
             )}

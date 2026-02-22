@@ -68,7 +68,7 @@ export const CardContents: React.FC<{ data: ProfileData }> = ({ data }) => {
               </div>
             )}
             {data.myContentMemo && (
-              <div className="text-[10px] text-stone-500 leading-[1.7] italic whitespace-pre-wrap">
+              <div className="text-[10px] text-stone-600 leading-[1.7] italic whitespace-pre-wrap">
                 {data.myContentMemo}
               </div>
             )}
@@ -116,7 +116,7 @@ export const CardContents: React.FC<{ data: ProfileData }> = ({ data }) => {
               </div>
             )}
             {data.youContentMemo && (
-              <div className="text-[10px] text-stone-500 leading-[1.7] italic text-right whitespace-pre-wrap">
+              <div className="text-[10px] text-stone-600 leading-[1.7] italic text-right whitespace-pre-wrap">
                 {data.youContentMemo}
               </div>
             )}
