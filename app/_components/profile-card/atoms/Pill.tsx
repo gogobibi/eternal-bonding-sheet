@@ -12,7 +12,7 @@ export const Pill: React.FC<{
     } ${
       accent
         ? `border-violet-200 bg-violet-50 text-violet-600${emphasized ? " font-bold" : ""}`
-        : "border-stone-200 bg-stone-100 text-stone-500"
+        : "border-stone-200 bg-stone-100 text-stone-600"
     }`}
   >
     {children}

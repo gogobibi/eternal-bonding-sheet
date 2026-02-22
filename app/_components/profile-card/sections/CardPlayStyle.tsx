@@ -23,7 +23,7 @@ export const CardPlayStyle: React.FC<{ playStyles: PlayStyleItem[] }> = ({
               >
                 <span
                   className={`text-[11px] shrink-0 mt-px leading-[1.6] inline-flex w-3 justify-center ${
-                    item.emphasized ? "text-amber-300" : "text-stone-300"
+                    item.emphasized ? "text-amber-500" : "text-stone-400"
                   }`}
                 >
                   {item.emphasized ? "\u2605" : "\u2013"}
@@ -32,7 +32,7 @@ export const CardPlayStyle: React.FC<{ playStyles: PlayStyleItem[] }> = ({
                   className={`text-[11px] leading-[1.7] ${
                     item.emphasized
                       ? "text-stone-800 font-medium"
-                      : "text-stone-600"
+                      : "text-stone-700"
                   }`}
                 >
                   {item.text}

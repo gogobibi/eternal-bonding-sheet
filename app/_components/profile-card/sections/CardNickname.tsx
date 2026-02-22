@@ -8,9 +8,9 @@ export const CardNickname: React.FC<{
   const displayName = nicknameBlind ? "비공개 " : nickname;
   if (!displayName && !server) return null;
   return (
-    <div className="mb-2 pb-[10px] text-right text-[10px] font-semibold tracking-[0.04em] text-stone-600">
+    <div className="mb-2 pb-[10px] text-right text-[10px] font-semibold tracking-[0.04em] text-stone-700">
       {displayName && (
-        <span className={nicknameBlind ? "text-stone-300" : ""}>
+        <span className={nicknameBlind ? "text-stone-400" : ""}>
           {displayName}
         </span>
       )}

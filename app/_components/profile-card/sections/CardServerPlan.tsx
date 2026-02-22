@@ -21,13 +21,13 @@ export const CardServerPlan: React.FC<{ data: ProfileData }> = ({ data }) => {
             <div className="flex gap-5">
               {data.serverMove && (
                 <div className="flex items-center gap-2">
-                  <span className="text-[9px] text-stone-400">서버 이동</span>
+                  <span className="text-[9px] text-stone-500">서버 이동</span>
                   <OptionMark value={data.serverMove} />
                 </div>
               )}
               {data.serverCross && (
                 <div className="flex items-center gap-2">
-                  <span className="text-[9px] text-stone-400">서버 초월</span>
+                  <span className="text-[9px] text-stone-500">서버 초월</span>
                   <OptionMark value={data.serverCross} />
                 </div>
               )}
@@ -35,12 +35,12 @@ export const CardServerPlan: React.FC<{ data: ProfileData }> = ({ data }) => {
           )}
           {data.covenantPlan && (
             <div className="flex items-center gap-2">
-              <span className="text-[9px] text-stone-400">언약 플랜</span>
+              <span className="text-[9px] text-stone-500">언약 플랜</span>
               <Pill accent>{data.covenantPlan}</Pill>
             </div>
           )}
           {data.serverPlanDesc && (
-            <div className="text-[10px] text-stone-600 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg whitespace-pre-wrap">
+            <div className="text-[10px] text-stone-700 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg whitespace-pre-wrap">
               {data.serverPlanDesc}
             </div>
           )}
