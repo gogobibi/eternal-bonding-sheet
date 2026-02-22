@@ -3,7 +3,6 @@
 import React from "react";
 import type { AccentColor } from "../theme";
 import { PALETTE_LIST } from "../theme";
-import { useTheme } from "../ThemeContext";
 
 interface Props {
   value: AccentColor;
@@ -11,8 +10,6 @@ interface Props {
 }
 
 export const ThemePicker: React.FC<Props> = ({ value, onChange }) => {
-  const theme = useTheme();
-
   return (
     <div className="flex flex-row items-center gap-4 p-1">
       <p className="text-[10px] tracking-[0.22em] uppercase text-stone-400">
