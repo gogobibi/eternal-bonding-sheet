@@ -1,5 +1,12 @@
 export type CouplingType = "BL" | "GL" | "HL";
 
+export type JobType =
+  | "Warrior" | "Paladin" | "Gunbreaker" | "Dark_Knight"
+  | "White_Mage" | "Scholar" | "Sage" | "Astrologian"
+  | "Bard" | "Black_Mage" | "Dancer" | "Dragoon" | "Machinist"
+  | "Monk" | "Ninja" | "Pictomancer" | "Reaper" | "Red_Mage"
+  | "Samurai" | "Summoner" | "Viper";
+
 export type RaceType =
   | "환상약O"
   | "환상약X"
@@ -27,6 +34,12 @@ export interface PhotoItem {
 }
 
 export interface PlayStyleItem {
+  id: string;
+  text: string;
+  emphasized: boolean;
+}
+
+export interface CustomKeywordItem {
   id: string;
   text: string;
   emphasized: boolean;
@@ -62,12 +75,14 @@ export interface ProfileData {
   meRace: RaceType[];
   youRace: RaceType[];
   // Contents
+  myJob: JobType[];
+  youJob: JobType[];
   mySelected: string[];
-  myCustom: string[];
+  myCustom: CustomKeywordItem[];
   myContentMemo: string;
   youContentsEnabled: boolean;
   youSelected: string[];
-  youCustom: string[];
+  youCustom: CustomKeywordItem[];
   youContentMemo: string;
   // Play styles
   playStyles: PlayStyleItem[];

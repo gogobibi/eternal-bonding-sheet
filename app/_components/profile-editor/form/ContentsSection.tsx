@@ -5,14 +5,19 @@ import { MeLabel } from "../atoms/MeLabel";
 import { Chip } from "../atoms/Chip";
 import { FieldInput } from "../atoms/FieldInput";
 import { FieldTextarea } from "../atoms/FieldTextarea";
+import { JobPicker } from "../atoms/JobPicker";
 import { CONTENT_GROUPS } from "../constants";
 import { toggleArr } from "../helpers";
+import type { JobType, CustomKeywordItem } from "../types";
 
 interface Props {
+  myJob: JobType[];
+  setMyJob: React.Dispatch<React.SetStateAction<JobType[]>>;
+  youJob: JobType[];
+  setYouJob: React.Dispatch<React.SetStateAction<JobType[]>>;
   mySelected: string[];
   setMySelected: React.Dispatch<React.SetStateAction<string[]>>;
-  myCustom: string[];
-  setMyCustom: React.Dispatch<React.SetStateAction<string[]>>;
+  myCustom: CustomKeywordItem[];
   myCustomInput: string;
   setMyCustomInput: (v: string) => void;
   myContentMemo: string;
@@ -21,21 +26,25 @@ interface Props {
   setYouContentsEnabled: React.Dispatch<React.SetStateAction<boolean>>;
   youSelected: string[];
   setYouSelected: React.Dispatch<React.SetStateAction<string[]>>;
-  youCustom: string[];
-  setYouCustom: React.Dispatch<React.SetStateAction<string[]>>;
+  youCustom: CustomKeywordItem[];
   youCustomInput: string;
   setYouCustomInput: (v: string) => void;
   youContentMemo: string;
   setYouContentMemo: (v: string) => void;
   addMyKeyword: () => void;
   addYouKeyword: () => void;
+  removeMyKeyword: (id: string) => void;
+  removeYouKeyword: (id: string) => void;
 }
 
 export const ContentsSection: React.FC<Props> = ({
+  myJob,
+  setMyJob,
+  youJob,
+  setYouJob,
   mySelected,
   setMySelected,
   myCustom,
-  setMyCustom,
   myCustomInput,
   setMyCustomInput,
   myContentMemo,
@@ -45,17 +54,19 @@ export const ContentsSection: React.FC<Props> = ({
   youSelected,
   setYouSelected,
   youCustom,
-  setYouCustom,
   youCustomInput,
   setYouCustomInput,
   youContentMemo,
   setYouContentMemo,
   addMyKeyword,
   addYouKeyword,
+  removeMyKeyword,
+  removeYouKeyword,
 }) => (
   <SectionCard title="주 컨텐츠">
     <div className="space-y-3">
       <MeLabel />
+      <JobPicker value={myJob} onChange={setMyJob} />
       {CONTENT_GROUPS.map((group) => (
         <div key={group.label}>
           <p className="text-[9px] text-stone-300 mb-1.5">{group.label}</p>
@@ -65,9 +76,7 @@ export const ContentsSection: React.FC<Props> = ({
                 key={item}
                 label={item}
                 selected={mySelected.includes(item)}
-                onClick={() =>
-                  setMySelected((prev) => toggleArr(prev, item))
-                }
+                onClick={() => setMySelected((prev) => toggleArr(prev, item))}
               />
             ))}
           </div>
@@ -79,14 +88,12 @@ export const ContentsSection: React.FC<Props> = ({
           <div className="flex flex-wrap gap-1">
             {myCustom.map((kw) => (
               <span
-                key={kw}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] bg-violet-50 border border-violet-200 text-violet-700"
+                key={kw.id}
+                className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] border bg-violet-50 border-violet-200 text-violet-700 ${kw.emphasized ? "font-bold" : ""}`}
               >
-                {kw}
+                {kw.text}
                 <button
-                  onClick={() =>
-                    setMyCustom((prev) => prev.filter((k) => k !== kw))
-                  }
+                  onClick={() => removeMyKeyword(kw.id)}
                   className="text-violet-400 hover:text-violet-600"
                 >
                   <X className="h-2.5 w-2.5" />
@@ -124,16 +131,22 @@ export const ContentsSection: React.FC<Props> = ({
         <div className="text-[10px] tracking-[0.22em] uppercase text-violet-400">
           YOU
         </div>
+      </div>
+      <JobPicker value={youJob} onChange={setYouJob} align="right" />
+      <div className="flex items-center justify-end gap-2">
+        <span className="text-[10px] text-stone-400">키워드 사용</span>
         <button
           type="button"
           onClick={() => setYouContentsEnabled((p) => !p)}
-          className={`text-[10px] px-2.5 py-1 rounded-full border transition-all ${
-            youContentsEnabled
-              ? "bg-violet-50 border-violet-300 text-violet-600"
-              : "bg-stone-50 border-stone-200 text-stone-400 hover:border-stone-300"
+          className={`relative inline-flex h-4 w-7 shrink-0 items-center rounded-full transition-colors ${
+            youContentsEnabled ? "bg-violet-400" : "bg-stone-200"
           }`}
         >
-          {youContentsEnabled ? "키워드 ON" : "키워드 OFF"}
+          <span
+            className={`inline-block h-3 w-3 rounded-full bg-white shadow transition-transform ${
+              youContentsEnabled ? "translate-x-3.5" : "translate-x-0.5"
+            }`}
+          />
         </button>
       </div>
       {youContentsEnabled && (
@@ -161,14 +174,12 @@ export const ContentsSection: React.FC<Props> = ({
             <div className="flex flex-wrap gap-1 justify-end">
               {youCustom.map((kw) => (
                 <span
-                  key={kw}
-                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] bg-violet-50 border border-violet-200 text-violet-700"
+                  key={kw.id}
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] border bg-violet-50 border-violet-200 text-violet-700 ${kw.emphasized ? "font-bold" : ""}`}
                 >
-                  {kw}
+                  {kw.text}
                   <button
-                    onClick={() =>
-                      setYouCustom((prev) => prev.filter((k) => k !== kw))
-                    }
+                    onClick={() => removeYouKeyword(kw.id)}
                     className="text-violet-400 hover:text-violet-600"
                   >
                     <X className="h-2.5 w-2.5" />
@@ -182,7 +193,7 @@ export const ContentsSection: React.FC<Props> = ({
               value={youCustomInput}
               onChange={(e) => setYouCustomInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && addYouKeyword()}
-              placeholder="키워드 직접 추가..."
+              placeholder="키워드 직접 추가"
               className="flex-1 text-right"
             />
             <button

@@ -21,7 +21,7 @@ export function ProfileEditor() {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_390px] gap-6 items-start">
         {/* LEFT: Form */}
         <div className="min-w-0 space-y-4">
           <HeaderImageSection {...form.header} />
