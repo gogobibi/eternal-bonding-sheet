@@ -12,6 +12,7 @@ export function useProfileForm() {
 
   // 2. Basic info
   const [nickname, setNickname] = useState("");
+  const [nicknameBlind, setNicknameBlind] = useState(false);
   const [server, setServer] = useState("");
 
   // ME
@@ -23,12 +24,12 @@ export function useProfileForm() {
   const [meTimeMemo, setMeTimeMemo] = useState("");
 
   // YOU
-  const [youGender, setYouGender] = useState("무관");
+  const [youGender, setYouGender] = useState("");
   const [youGenderCustom, setYouGenderCustom] = useState("");
-  const [youAge, setYouAge] = useState("무관");
-  const [youWeekdayAny, setYouWeekdayAny] = useState(true);
+  const [youAge, setYouAge] = useState<string[]>([]);
+  const [youWeekdayAny, setYouWeekdayAny] = useState(false);
   const [youWeekday, setYouWeekday] = useState<string[]>([]);
-  const [youWeekendAny, setYouWeekendAny] = useState(true);
+  const [youWeekendAny, setYouWeekendAny] = useState(false);
   const [youWeekend, setYouWeekend] = useState<string[]>([]);
   const [youTimeMemo, setYouTimeMemo] = useState("");
 
@@ -67,6 +68,7 @@ export function useProfileForm() {
     displayOption,
     headerImage,
     nickname,
+    nicknameBlind,
     server,
     meGender,
     meGenderCustom,
@@ -156,7 +158,14 @@ export function useProfileForm() {
   return {
     profileData,
     header: { headerImage, setHeaderImage, handleHeaderUpload },
-    basic: { nickname, setNickname, server, setServer },
+    basic: {
+      nickname,
+      setNickname,
+      nicknameBlind,
+      setNicknameBlind,
+      server,
+      setServer,
+    },
     basicMe: {
       meGender, setMeGender,
       meGenderCustom, setMeGenderCustom,

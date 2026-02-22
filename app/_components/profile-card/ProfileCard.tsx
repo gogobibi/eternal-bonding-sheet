@@ -20,7 +20,7 @@ export const ProfileCard = React.forwardRef<
   >
     <CardHeader headerImage={data.headerImage} />
     <div className="px-6 pt-7 pb-5">
-      <CardNickname nickname={data.nickname} server={data.server} />
+      <CardNickname nickname={data.nickname} server={data.server} nicknameBlind={data.nicknameBlind} />
       <CardBasicInfo data={data} />
       <CardCharacter data={data} />
       <CardContents data={data} />

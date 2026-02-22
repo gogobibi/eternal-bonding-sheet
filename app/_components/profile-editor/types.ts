@@ -14,6 +14,7 @@ export interface ProfileData {
   displayOption: "image-only" | "image-with-text";
   headerImage: string | null;
   nickname: string;
+  nicknameBlind: boolean;
   server: string;
   // ME
   meGender: string;
@@ -25,7 +26,7 @@ export interface ProfileData {
   // YOU
   youGender: string;
   youGenderCustom: string;
-  youAge: string;
+  youAge: string[];
   youWeekdayAny: boolean;
   youWeekday: string[];
   youWeekendAny: boolean;
