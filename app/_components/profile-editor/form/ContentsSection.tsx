@@ -108,7 +108,7 @@ export const ContentsSection: React.FC<Props> = ({
           value={myCustomInput}
           onChange={(e) => setMyCustomInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addMyKeyword()}
-          placeholder="키워드 직접 추가..."
+          placeholder="키워드 직접 추가"
           className="flex-1"
         />
         <button
@@ -122,7 +122,7 @@ export const ContentsSection: React.FC<Props> = ({
       <FieldTextarea
         value={myContentMemo}
         onChange={(e) => setMyContentMemo(e.target.value)}
-        placeholder="컨텐츠에 대한 간단한 설명..."
+        placeholder="주직, 주요 컨텐츠에 대한 간단한 설명"
         rows={2}
       />
     </div>
@@ -209,7 +209,7 @@ export const ContentsSection: React.FC<Props> = ({
       <FieldTextarea
         value={youContentMemo}
         onChange={(e) => setYouContentMemo(e.target.value)}
-        placeholder="원하는 컨텐츠 스타일, 조건 등..."
+        placeholder="원하는 컨텐츠 스타일, 조건 등"
         rows={2}
         className="text-right"
       />

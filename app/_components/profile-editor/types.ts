@@ -1,11 +1,27 @@
 export type CouplingType = "BL" | "GL" | "HL";
 
 export type JobType =
-  | "Warrior" | "Paladin" | "Gunbreaker" | "Dark_Knight"
-  | "White_Mage" | "Scholar" | "Sage" | "Astrologian"
-  | "Bard" | "Black_Mage" | "Dancer" | "Dragoon" | "Machinist"
-  | "Monk" | "Ninja" | "Pictomancer" | "Reaper" | "Red_Mage"
-  | "Samurai" | "Summoner" | "Viper";
+  | "Warrior"
+  | "Paladin"
+  | "Gunbreaker"
+  | "Dark_Knight"
+  | "White_Mage"
+  | "Scholar"
+  | "Sage"
+  | "Astrologian"
+  | "Bard"
+  | "Black_Mage"
+  | "Dancer"
+  | "Dragoon"
+  | "Machinist"
+  | "Monk"
+  | "Ninja"
+  | "Pictomancer"
+  | "Reaper"
+  | "Red_Mage"
+  | "Samurai"
+  | "Summoner"
+  | "Viper";
 
 export type RaceType =
   | "환상약O"
@@ -18,6 +34,8 @@ export type RaceType =
   | "남고휴"
   | "여중휴"
   | "여고휴"
+  | "남우라"
+  | "여우라"
   | "남레젠"
   | "여레젠"
   | "남비에라"

@@ -12,7 +12,7 @@ export const FreeTextSection: React.FC<Props> = ({ freeText, setFreeText }) => (
     <FieldTextarea
       value={freeText}
       onChange={(e) => setFreeText(e.target.value)}
-      placeholder="자유롭게 작성해주세요..."
+      placeholder="자유롭게 작성해주세요"
       rows={5}
     />
   </SectionCard>

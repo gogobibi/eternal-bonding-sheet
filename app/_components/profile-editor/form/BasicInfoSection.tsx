@@ -266,7 +266,7 @@ export const BasicInfoSection: React.FC<Props> = ({
               <FieldTextarea
                 value={basicMe.meTimeMemo}
                 onChange={(e) => basicMe.setMeTimeMemo(e.target.value)}
-                placeholder="접속 메모..."
+                placeholder="간단한 메모"
                 rows={2}
               />
             </div>
@@ -433,7 +433,7 @@ export const BasicInfoSection: React.FC<Props> = ({
               <FieldTextarea
                 value={basicYou.youTimeMemo}
                 onChange={(e) => basicYou.setYouTimeMemo(e.target.value)}
-                placeholder="접속 메모..."
+                placeholder="간단한 메모"
                 rows={2}
                 className="text-right"
               />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
@@ -8,8 +9,14 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "언약 프로필 · FFXIV",
-  description: "파이널 판타지 14 언약 프로필 생성기",
+  title: "언약 시트 생성기 · FFXIV",
+  description: "파이널 판타지 14 언약 시트 생성기",
+  icons: {
+    icon: "/heart.png",
+  },
+  openGraph: {
+    images: [{ url: "/meta.png" }],
+  },
 };
 
 export default function RootLayout({
@@ -21,6 +28,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${notoSansKr.variable} antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
