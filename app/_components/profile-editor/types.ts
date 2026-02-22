@@ -39,6 +39,12 @@ export interface PlayStyleItem {
   emphasized: boolean;
 }
 
+export interface CustomKeywordItem {
+  id: string;
+  text: string;
+  emphasized: boolean;
+}
+
 export interface ProfileData {
   displayOption: "image-only" | "image-with-text";
   headerImage: string | null;
@@ -72,11 +78,11 @@ export interface ProfileData {
   myJob: JobType[];
   youJob: JobType[];
   mySelected: string[];
-  myCustom: string[];
+  myCustom: CustomKeywordItem[];
   myContentMemo: string;
   youContentsEnabled: boolean;
   youSelected: string[];
-  youCustom: string[];
+  youCustom: CustomKeywordItem[];
   youContentMemo: string;
   // Play styles
   playStyles: PlayStyleItem[];

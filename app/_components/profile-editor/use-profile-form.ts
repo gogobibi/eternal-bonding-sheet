@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ProfileData, PhotoItem, PlayStyleItem, CouplingType, RaceType, JobType } from "./types";
+import type { ProfileData, PhotoItem, PlayStyleItem, CustomKeywordItem, CouplingType, RaceType, JobType } from "./types";
 import { toggleTypeTier } from "./helpers";
 
 export function useProfileForm() {
@@ -46,12 +46,12 @@ export function useProfileForm() {
   const [myJob, setMyJob] = useState<JobType[]>([]);
   const [youJob, setYouJob] = useState<JobType[]>([]);
   const [mySelected, setMySelected] = useState<string[]>([]);
-  const [myCustom, setMyCustom] = useState<string[]>([]);
+  const [myCustom, setMyCustom] = useState<CustomKeywordItem[]>([]);
   const [myCustomInput, setMyCustomInput] = useState("");
   const [myContentMemo, setMyContentMemo] = useState("");
   const [youContentsEnabled, setYouContentsEnabled] = useState(false);
   const [youSelected, setYouSelected] = useState<string[]>([]);
-  const [youCustom, setYouCustom] = useState<string[]>([]);
+  const [youCustom, setYouCustom] = useState<CustomKeywordItem[]>([]);
   const [youCustomInput, setYouCustomInput] = useState("");
   const [youContentMemo, setYouContentMemo] = useState("");
 
@@ -169,15 +169,21 @@ export function useProfileForm() {
 
   const addMyKeyword = () => {
     if (!myCustomInput.trim()) return;
-    setMyCustom((prev) => [...prev, myCustomInput.trim()]);
+    setMyCustom((prev) => [...prev, { id: Date.now().toString(), text: myCustomInput.trim(), emphasized: true }]);
     setMyCustomInput("");
   };
 
   const addYouKeyword = () => {
     if (!youCustomInput.trim()) return;
-    setYouCustom((prev) => [...prev, youCustomInput.trim()]);
+    setYouCustom((prev) => [...prev, { id: Date.now().toString(), text: youCustomInput.trim(), emphasized: true }]);
     setYouCustomInput("");
   };
+
+  const removeMyKeyword = (id: string) =>
+    setMyCustom((prev) => prev.filter((kw) => kw.id !== id));
+
+  const removeYouKeyword = (id: string) =>
+    setYouCustom((prev) => prev.filter((kw) => kw.id !== id));
 
   return {
     profileData,
@@ -232,6 +238,7 @@ export function useProfileForm() {
       youCustomInput, setYouCustomInput,
       youContentMemo, setYouContentMemo,
       addMyKeyword, addYouKeyword,
+      removeMyKeyword, removeYouKeyword,
     },
     playStyle: { playStyles, setPlayStyles, addPlayStyle, updatePlayStyle },
     serverPlan: {
