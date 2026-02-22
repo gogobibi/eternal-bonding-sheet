@@ -1,9 +1,13 @@
+"use client";
+
 import React from "react";
 import { SectionBlock } from "../atoms/SectionBlock";
 import { Pill } from "../atoms/Pill";
 import type { ProfileData } from "../../profile-editor/types";
+import { useTheme } from "../../profile-editor/ThemeContext";
 
 export const CardContents: React.FC<{ data: ProfileData }> = ({ data }) => {
+  const theme = useTheme();
   const hasContentsSection =
     data.myJob.length > 0 ||
     data.mySelected.length > 0 ||
@@ -28,7 +32,7 @@ export const CardContents: React.FC<{ data: ProfileData }> = ({ data }) => {
           data.myCustom.length > 0 ||
           data.myContentMemo) && (
           <div className={hasYouSection ? "mb-3.5" : ""}>
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2">
+            <div className={`text-[9px] tracking-[0.2em] uppercase ${theme.cardLabel} font-semibold mb-2`}>
               ME
             </div>
             {data.myJob.length > 0 && (
@@ -76,7 +80,7 @@ export const CardContents: React.FC<{ data: ProfileData }> = ({ data }) => {
         )}
         {hasYouSection && (
           <div>
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2 text-right">
+            <div className={`text-[9px] tracking-[0.2em] uppercase ${theme.cardLabel} font-semibold mb-2 text-right`}>
               YOU
             </div>
             {data.youJob.length > 0 && (

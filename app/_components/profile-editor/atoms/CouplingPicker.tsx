@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import type { CouplingType } from "../types";
 import { formatCouplingPriority } from "../helpers";
+import { useTheme } from "../ThemeContext";
 
 const COUPLING_TYPES: CouplingType[] = ["BL", "GL", "HL"];
 const TIER_LABELS = ["1순위", "2순위", "3순위"];
@@ -11,6 +14,7 @@ interface Props {
 }
 
 export const CouplingPicker: React.FC<Props> = ({ value, onChange }) => {
+  const theme = useTheme();
   const preview = formatCouplingPriority(value);
 
   const usedInPriorTiers = (tierIndex: number) =>
@@ -25,7 +29,7 @@ export const CouplingPicker: React.FC<Props> = ({ value, onChange }) => {
         <span>커플링 선호</span>
         {preview && (
           <>
-            <span className="text-[10px] text-violet-500">{preview}</span>
+            <span className={`text-[10px] ${theme.couplingPreviewText}`}>{preview}</span>
           </>
         )}
       </div>
@@ -51,7 +55,7 @@ export const CouplingPicker: React.FC<Props> = ({ value, onChange }) => {
                       !isAvailable
                         ? "bg-stone-50 border-stone-100 text-stone-200 cursor-not-allowed"
                         : isSelected
-                          ? "bg-violet-50 border-violet-300 text-violet-700"
+                          ? theme.couplingBtnSelected
                           : "bg-stone-50 border-stone-200 text-stone-400 hover:border-stone-300 hover:text-stone-600"
                     }`}
                   >

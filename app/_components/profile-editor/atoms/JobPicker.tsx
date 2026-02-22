@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import type { JobType } from "../types";
+import { useTheme } from "../ThemeContext";
 
 const JOB_GROUPS: {
   role: string;
@@ -40,6 +43,8 @@ interface Props {
 }
 
 export const JobPicker: React.FC<Props> = ({ value, onChange, align = "left" }) => {
+  const theme = useTheme();
+
   const toggleJob = (job: JobType) => {
     onChange((prev) =>
       prev.includes(job) ? prev.filter((j) => j !== job) : [...prev, job]
@@ -74,7 +79,7 @@ export const JobPicker: React.FC<Props> = ({ value, onChange, align = "left" }) 
             onClick={() => toggleGroup(group.jobs)}
             className={`rounded p-0.5 transition-all ${
               isGroupSelected(group.jobs)
-                ? "bg-violet-100 ring-1 ring-violet-400"
+                ? theme.jobSelected
                 : "opacity-40 hover:opacity-70"
             }`}
             title={group.role}
@@ -89,7 +94,7 @@ export const JobPicker: React.FC<Props> = ({ value, onChange, align = "left" }) 
               onClick={() => toggleJob(job)}
               className={`rounded p-0.5 transition-all ${
                 value.includes(job)
-                  ? "bg-violet-100 ring-1 ring-violet-400"
+                  ? theme.jobSelected
                   : "opacity-40 hover:opacity-70"
               }`}
               title={job}

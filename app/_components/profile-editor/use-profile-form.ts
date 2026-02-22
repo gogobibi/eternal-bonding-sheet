@@ -1,8 +1,12 @@
 import { useState } from "react";
 import type { ProfileData, PhotoItem, PlayStyleItem, CustomKeywordItem, CouplingType, RaceType, JobType } from "./types";
+import type { AccentColor } from "./theme";
 import { toggleTypeTier } from "./helpers";
 
 export function useProfileForm() {
+  // Theme accent color
+  const [accentColor, setAccentColor] = useState<AccentColor>("violet");
+
   // Display option
   const [displayOption, setDisplayOption] = useState<
     "image-only" | "image-with-text"
@@ -71,6 +75,7 @@ export function useProfileForm() {
 
   // ── Build ProfileData ──
   const profileData: ProfileData = {
+    accentColor,
     displayOption,
     headerImage,
     nickname,
@@ -187,6 +192,8 @@ export function useProfileForm() {
 
   return {
     profileData,
+    accentColor,
+    setAccentColor,
     header: { headerImage, setHeaderImage, handleHeaderUpload },
     basic: {
       nickname,

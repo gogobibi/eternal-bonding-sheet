@@ -64,6 +64,7 @@ export interface CustomKeywordItem {
 }
 
 export interface ProfileData {
+  accentColor: import("./theme").AccentColor;
   displayOption: "image-only" | "image-with-text";
   headerImage: string | null;
   nickname: string;
