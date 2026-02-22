@@ -135,17 +135,20 @@ export const ContentsSection: React.FC<Props> = ({
         </div>
       </div>
       <JobPicker value={youJob} onChange={setYouJob} align="right" />
-      <div className="flex justify-end">
+      <div className="flex items-center justify-end gap-2">
+        <span className="text-[10px] text-stone-400">키워드 사용</span>
         <button
           type="button"
           onClick={() => setYouContentsEnabled((p) => !p)}
-          className={`text-[10px] px-2.5 py-1 rounded-full border transition-all ${
-            youContentsEnabled
-              ? "bg-violet-50 border-violet-300 text-violet-600"
-              : "bg-stone-50 border-stone-200 text-stone-400 hover:border-stone-300"
+          className={`relative inline-flex h-4 w-7 shrink-0 items-center rounded-full transition-colors ${
+            youContentsEnabled ? "bg-violet-400" : "bg-stone-200"
           }`}
         >
-          {youContentsEnabled ? "키워드 ON" : "키워드 OFF"}
+          <span
+            className={`inline-block h-3 w-3 rounded-full bg-white shadow transition-transform ${
+              youContentsEnabled ? "translate-x-3.5" : "translate-x-0.5"
+            }`}
+          />
         </button>
       </div>
       {youContentsEnabled && (
