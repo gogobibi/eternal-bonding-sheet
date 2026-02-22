@@ -124,6 +124,7 @@ export function useProfileForm() {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (ev) => setHeaderImage(ev.target?.result as string);
+    reader.onerror = () => alert(`${file.name}\n파일을 읽는 중 오류가 발생했습니다.`);
     reader.readAsDataURL(file);
     e.target.value = "";
   };
@@ -140,6 +141,7 @@ export function useProfileForm() {
         return;
       }
       const reader = new FileReader();
+      reader.onerror = () => alert(`${file.name}\n파일을 읽는 중 오류가 발생했습니다.`);
       reader.onload = (ev) => {
         setCharImages((prev) => {
           if (prev.length >= MAX_CHAR_IMAGES) return prev;
