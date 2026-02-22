@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { SectionCard } from "../atoms/SectionCard";
 import { MeLabel } from "../atoms/MeLabel";
@@ -8,6 +10,7 @@ import { FieldInput } from "../atoms/FieldInput";
 import { FieldTextarea } from "../atoms/FieldTextarea";
 import { SERVERS, AGE_DECADES, AGE_PHASES, TIME_SLOTS } from "../constants";
 import { toggleArr } from "../helpers";
+import { useTheme } from "../ThemeContext";
 
 interface Props {
   basic: {
@@ -57,6 +60,7 @@ export const BasicInfoSection: React.FC<Props> = ({
   basicMe,
   basicYou,
 }) => {
+  const theme = useTheme();
   const [meDecade, setMeDecade] = useState("");
   const [mePhase, setMePhase] = useState("");
   const [youDecadeTemp, setYouDecadeTemp] = useState("");
@@ -175,7 +179,7 @@ export const BasicInfoSection: React.FC<Props> = ({
                 value={basicMe.meGenderCustom}
                 onChange={(e) => basicMe.setMeGenderCustom(e.target.value)}
                 placeholder="직접 입력"
-                className="mt-1.5 w-full px-2 py-1 text-[10px] border border-stone-200 rounded-lg bg-stone-50 focus:outline-none focus:border-violet-300"
+                className={`mt-1.5 w-full px-2 py-1 text-[10px] border border-stone-200 rounded-lg bg-stone-50 focus:outline-none ${theme.inputFocus}`}
               />
             )}
           </div>
@@ -197,7 +201,7 @@ export const BasicInfoSection: React.FC<Props> = ({
                   }}
                   className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${
                     meDecade === decade
-                      ? "border-violet-300 bg-violet-100 text-violet-600"
+                      ? theme.ageDecadeSelected
                       : "border-stone-200 bg-stone-50 text-stone-400"
                   }`}
                 >
@@ -220,7 +224,7 @@ export const BasicInfoSection: React.FC<Props> = ({
                           ? mePhase === ""
                           : mePhase === phase
                       )
-                        ? "border-violet-300 bg-violet-100 text-violet-600"
+                        ? theme.ageDecadeSelected
                         : "border-stone-200 bg-stone-50 text-stone-400"
                     }`}
                   >
@@ -293,7 +297,7 @@ export const BasicInfoSection: React.FC<Props> = ({
                 value={basicYou.youGenderCustom}
                 onChange={(e) => basicYou.setYouGenderCustom(e.target.value)}
                 placeholder="직접 입력"
-                className="mt-1.5 w-full px-2 py-1 text-[10px] border border-stone-200 rounded-lg bg-stone-50 focus:outline-none focus:border-violet-300 text-right"
+                className={`mt-1.5 w-full px-2 py-1 text-[10px] border border-stone-200 rounded-lg bg-stone-50 focus:outline-none ${theme.inputFocus} text-right`}
               />
             )}
           </div>
@@ -327,13 +331,13 @@ export const BasicInfoSection: React.FC<Props> = ({
                     {basicYou.youAge.map((tag) => (
                       <span
                         key={tag}
-                        className="inline-flex items-center gap-0.5 rounded border border-violet-200 bg-violet-50 px-1.5 py-0.5 text-[9px] text-violet-600"
+                        className={`inline-flex items-center gap-0.5 rounded border ${theme.ageYouTag} px-1.5 py-0.5 text-[9px]`}
                       >
                         {tag}
                         <button
                           type="button"
                           onClick={() => removeYouAge(tag)}
-                          className="text-violet-400 hover:text-violet-600"
+                          className={theme.ageYouRemove}
                           aria-label={`${tag} 제거`}
                         >
                           ×
@@ -350,7 +354,7 @@ export const BasicInfoSection: React.FC<Props> = ({
                       onClick={() => handleDecadeClick(decade)}
                       className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${
                         youDecadeTemp === decade
-                          ? "border-violet-300 bg-violet-100 text-violet-600"
+                          ? theme.ageDecadeSelected
                           : "border-stone-200 bg-stone-50 text-stone-400"
                       }`}
                     >
@@ -365,7 +369,7 @@ export const BasicInfoSection: React.FC<Props> = ({
                         key={phase}
                         type="button"
                         onClick={() => handlePhaseClick(phase)}
-                        className="rounded border border-stone-200 bg-stone-50 px-1.5 py-0.5 text-[9px] text-stone-400 transition-all hover:border-violet-300 hover:bg-violet-100 hover:text-violet-600"
+                        className={`rounded border border-stone-200 bg-stone-50 px-1.5 py-0.5 text-[9px] text-stone-400 transition-all ${theme.agePhaseHover}`}
                       >
                         {phase}
                       </button>

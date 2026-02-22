@@ -1,13 +1,17 @@
+"use client";
+
 import React from "react";
 import { SectionBlock } from "../atoms/SectionBlock";
 import { Pill } from "../atoms/Pill";
 import type { ProfileData } from "../../profile-editor/types";
 import { TIME_SLOTS } from "../../profile-editor/constants";
+import { useTheme } from "../../profile-editor/ThemeContext";
 
 const sortByTimeSlot = (slots: string[]) =>
   [...slots].sort((a, b) => TIME_SLOTS.indexOf(a) - TIME_SLOTS.indexOf(b));
 
 export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
+  const theme = useTheme();
   const meGenderDisplay =
     data.meGender === "직접기입" ? data.meGenderCustom : data.meGender;
   const youGenderDisplay =
@@ -19,7 +23,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
         <div className="grid grid-cols-2">
           {/* ME */}
           <div className="pr-4">
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2">
+            <div className={`text-[9px] tracking-[0.2em] uppercase ${theme.cardLabel} font-semibold mb-2`}>
               ME
             </div>
             <div className="flex flex-col gap-1.5">
@@ -76,7 +80,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
 
           {/* YOU */}
           <div className="pl-4 border-l border-stone-200">
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2 text-right">
+            <div className={`text-[9px] tracking-[0.2em] uppercase ${theme.cardLabel} font-semibold mb-2 text-right`}>
               YOU
             </div>
             <div className="flex flex-col items-end gap-1.5">

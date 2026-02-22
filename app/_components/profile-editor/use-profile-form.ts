@@ -1,8 +1,12 @@
 import { useState } from "react";
 import type { ProfileData, PhotoItem, PlayStyleItem, CustomKeywordItem, CouplingType, RaceType, JobType } from "./types";
+import type { AccentColor } from "./theme";
 import { toggleTypeTier } from "./helpers";
 
 export function useProfileForm() {
+  // Theme accent color
+  const [accentColor, setAccentColor] = useState<AccentColor>("violet");
+
   // Display option
   const [displayOption, setDisplayOption] = useState<
     "image-only" | "image-with-text"
@@ -71,6 +75,7 @@ export function useProfileForm() {
 
   // ── Build ProfileData ──
   const profileData: ProfileData = {
+    accentColor,
     displayOption,
     headerImage,
     nickname,
@@ -119,6 +124,7 @@ export function useProfileForm() {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (ev) => setHeaderImage(ev.target?.result as string);
+    reader.onerror = () => alert(`${file.name}\n파일을 읽는 중 오류가 발생했습니다.`);
     reader.readAsDataURL(file);
     e.target.value = "";
   };
@@ -135,6 +141,7 @@ export function useProfileForm() {
         return;
       }
       const reader = new FileReader();
+      reader.onerror = () => alert(`${file.name}\n파일을 읽는 중 오류가 발생했습니다.`);
       reader.onload = (ev) => {
         setCharImages((prev) => {
           if (prev.length >= MAX_CHAR_IMAGES) return prev;
@@ -187,6 +194,8 @@ export function useProfileForm() {
 
   return {
     profileData,
+    accentColor,
+    setAccentColor,
     header: { headerImage, setHeaderImage, handleHeaderUpload },
     basic: {
       nickname,

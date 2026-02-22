@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { useProfileForm } from "./use-profile-form";
 import { useImageGenerator } from "./use-image-generator";
+import { ThemeProvider } from "./ThemeContext";
 import { ProfileCard } from "../profile-card/ProfileCard";
 import { HeaderImageSection } from "./form/HeaderImageSection";
 import { BasicInfoSection } from "./form/BasicInfoSection";
@@ -12,6 +13,7 @@ import { PlayStyleSection } from "./form/PlayStyleSection";
 import { ServerPlanSection } from "./form/ServerPlanSection";
 import { FreeTextSection } from "./form/FreeTextSection";
 import { PreviewPanel } from "./preview/PreviewPanel";
+import { ThemePicker } from "./atoms/ThemePicker";
 
 export function ProfileEditor() {
   const captureRef = useRef<HTMLDivElement>(null);
@@ -20,10 +22,11 @@ export function ProfileEditor() {
     useImageGenerator(captureRef, form.profileData.nickname);
 
   return (
-    <>
+    <ThemeProvider accentColor={form.accentColor}>
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_390px] gap-6 items-start">
         {/* LEFT: Form */}
         <div className="min-w-0 space-y-4">
+          <ThemePicker value={form.accentColor} onChange={form.setAccentColor} />
           <HeaderImageSection {...form.header} />
           <BasicInfoSection
             basic={form.basic}
@@ -56,6 +59,6 @@ export function ProfileEditor() {
           <ProfileCard data={form.profileData} />
         </div>
       </div>
-    </>
+    </ThemeProvider>
   );
 }

@@ -1,9 +1,13 @@
+"use client";
+
 import React from "react";
 import { SectionBlock } from "../atoms/SectionBlock";
 import type { ProfileData } from "../../profile-editor/types";
 import { formatCouplingPriority } from "../../profile-editor/helpers";
+import { useTheme } from "../../profile-editor/ThemeContext";
 
 export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
+  const theme = useTheme();
   const hasCharSection =
     data.charImages.length > 0 ||
     !!data.charMemo ||
@@ -26,7 +30,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
               data.youCharMemo || data.youRace.length > 0 ? "mb-4" : ""
             }
           >
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2">
+            <div className={`text-[9px] tracking-[0.2em] uppercase ${theme.cardLabel} font-semibold mb-2`}>
               ME
             </div>
             {data.charImages.length > 0 &&
@@ -114,7 +118,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                       ) : (
                         <span
                           key={i}
-                          className="text-[10px] text-violet-600 rounded px-1.5 py-0.5 leading-none"
+                          className={`text-[10px] ${theme.cardCouplingText} rounded px-1.5 py-0.5 leading-none`}
                         >
                           {part}
                         </span>
@@ -133,7 +137,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
         )}
         {(data.youCharMemo || data.youRace.length > 0) && (
           <div>
-            <div className="text-[9px] tracking-[0.2em] uppercase text-violet-500 font-semibold mb-2 text-right">
+            <div className={`text-[9px] tracking-[0.2em] uppercase ${theme.cardLabel} font-semibold mb-2 text-right`}>
               YOU
             </div>
             {data.youRace.length > 0 && (

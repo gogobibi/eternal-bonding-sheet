@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Upload, X } from "lucide-react";
@@ -9,6 +11,7 @@ import { CouplingPicker } from "../atoms/CouplingPicker";
 import { RacePicker } from "../atoms/RacePicker";
 import type { PhotoItem, CouplingType, RaceType } from "../types";
 import { toggleArr } from "../helpers";
+import { useTheme } from "../ThemeContext";
 
 interface Props {
   displayOption: "image-only" | "image-with-text";
@@ -44,7 +47,9 @@ export const CharacterSection: React.FC<Props> = ({
   setMeRace,
   youRace,
   setYouRace,
-}) => (
+}) => {
+  const theme = useTheme();
+  return (
   <SectionCard title="커마 · 커플링">
     <div className="space-y-3">
       <MeLabel />
@@ -67,7 +72,7 @@ export const CharacterSection: React.FC<Props> = ({
         <button
           type="button"
           onClick={() => document.getElementById("char-img-upload")?.click()}
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-stone-200 py-3 text-stone-400 transition-colors hover:border-violet-300 hover:text-violet-400"
+          className={`flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-stone-200 py-3 text-stone-400 transition-colors ${theme.uploadHover}`}
         >
           <Upload className="h-4 w-4" />
           <span className="text-xs">이미지 추가 ({charImages.length}/10)</span>
@@ -186,4 +191,5 @@ export const CharacterSection: React.FC<Props> = ({
       />
     </div>
   </SectionCard>
-);
+  );
+};
