@@ -8,9 +8,7 @@ interface Props {
   nickname: string;
   nicknameBlind: boolean;
   isGenerating: boolean;
-  previewUrl: string | null;
   handleGenerate: () => void;
-  handleDownload: () => void;
 }
 
 export const PreviewPanel: React.FC<Props> = ({
