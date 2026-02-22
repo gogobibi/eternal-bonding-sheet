@@ -5,6 +5,7 @@ export const OptionBtn: React.FC<{
   selected: boolean;
   onClick: () => void;
   size?: "sm" | "md";
+  special?: boolean;
 }> = ({ label, selected, onClick, size = "md" }) => (
   <button
     type="button"

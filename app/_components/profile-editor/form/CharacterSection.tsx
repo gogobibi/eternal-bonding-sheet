@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Upload, X } from "lucide-react";
 import { SectionCard } from "../atoms/SectionCard";
 import { MeLabel } from "../atoms/MeLabel";
-import { Mini } from "../atoms/Mini";
 import { OptionBtn } from "../atoms/OptionBtn";
 import { FieldTextarea } from "../atoms/FieldTextarea";
 import { CouplingPicker } from "../atoms/CouplingPicker";
