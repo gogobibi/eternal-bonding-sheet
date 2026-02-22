@@ -70,7 +70,9 @@ export const ContentsSection: React.FC<Props> = ({
   return (
     <SectionCard title="주 컨텐츠">
       <div className="space-y-3">
-        <div className={`text-[10px] tracking-[0.22em] uppercase ${theme.editorLabel} mb-3`}>
+        <div
+          className={`text-[10px] tracking-[0.22em] uppercase ${theme.editorLabel} mb-3`}
+        >
           ME
         </div>
         <JobPicker value={myJob} onChange={setMyJob} />
@@ -134,8 +136,10 @@ export const ContentsSection: React.FC<Props> = ({
         />
       </div>
       <div className="border-t border-stone-100 mt-5 pt-4 space-y-3">
-        <div className="flex items-center justify-between">
-          <div className={`text-[10px] tracking-[0.22em] uppercase ${theme.editorLabel}`}>
+        <div className="flex items-center justify-end">
+          <div
+            className={`text-[10px] tracking-[0.22em] uppercase ${theme.editorLabel}`}
+          >
             YOU
           </div>
         </div>
