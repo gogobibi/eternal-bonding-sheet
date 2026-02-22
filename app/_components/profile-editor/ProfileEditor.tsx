@@ -42,6 +42,7 @@ export function ProfileEditor() {
         <PreviewPanel
           profileData={form.profileData}
           nickname={form.profileData.nickname}
+          nicknameBlind={form.profileData.nicknameBlind}
           isGenerating={isGenerating}
           previewUrl={previewUrl}
           handleGenerate={handleGenerate}
