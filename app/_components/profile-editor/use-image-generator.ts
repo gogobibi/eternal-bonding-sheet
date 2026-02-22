@@ -25,7 +25,7 @@ export function useImageGenerator(
       const url = await toPng(target, options);
 
       const link = document.createElement("a");
-      link.download = `ff14-profile-${nickname || "profile"}.png`;
+      link.download = `ff14-eternal-bonding-sheet-${nickname || "no-nickname"}.png`;
       link.href = url;
       link.click();
     } catch (err) {
