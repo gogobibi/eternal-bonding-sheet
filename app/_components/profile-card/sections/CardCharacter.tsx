@@ -70,7 +70,7 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                 </div>
               ))}
             {data.meRace.length > 0 && (
-              <div className="flex flex-wrap gap-1 mb-2">
+              <div className="flex flex-wrap gap-1 mb-2 mt-3">
                 {[...data.meRace]
                   .sort((a, b) =>
                     (a === "환상약O" || a === "환상약X") &&
@@ -94,11 +94,12 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                   ))}
               </div>
             )}
-            <div className="">
-              <div className="mx-1 flex items-center text-[9px] text-stone-400">
-                선호 커플링
-              </div>
-              {data.couplingPriority.length > 0 && (
+
+            {data.couplingPriority.some((tier) => tier.length > 0) && (
+              <div>
+                <div className="mx-1 flex items-center text-[9px] text-stone-400">
+                  선호 커플링
+                </div>
                 <div className="flex flex-wrap items-center gap-1 mt-2 mb-2">
                   {formatCouplingPriority(data.couplingPriority)
                     .split(/( > | = )/)
@@ -120,8 +121,8 @@ export const CardCharacter: React.FC<{ data: ProfileData }> = ({ data }) => {
                       ),
                     )}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
 
             {data.charMemo && (
               <div className="text-[10px] text-stone-600 leading-[1.7] px-3 py-2 bg-stone-100 rounded-lg whitespace-pre-wrap">
