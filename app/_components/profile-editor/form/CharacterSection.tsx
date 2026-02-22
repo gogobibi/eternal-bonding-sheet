@@ -145,7 +145,7 @@ export const CharacterSection: React.FC<Props> = ({
                       ),
                     )
                   }
-                  placeholder="설명 입력..."
+                  placeholder="설명 입력"
                   rows={3}
                   className="flex-1"
                 />

@@ -82,7 +82,7 @@ export const ServerPlanSection: React.FC<Props> = ({
         <FieldTextarea
           value={serverPlanDesc}
           onChange={(e) => setServerPlanDesc(e.target.value)}
-          placeholder="서버, 언약 플랜에 대한 추가 설명..."
+          placeholder="서버, 언약 플랜에 대한 추가 설명"
           rows={3}
         />
       </div>
