@@ -1,5 +1,12 @@
 export type CouplingType = "BL" | "GL" | "HL";
 
+export type JobType =
+  | "Warrior" | "Paladin" | "Gunbreaker" | "Dark_Knight"
+  | "White_Mage" | "Scholar" | "Sage" | "Astrologian"
+  | "Bard" | "Black_Mage" | "Dancer" | "Dragoon" | "Machinist"
+  | "Monk" | "Ninja" | "Pictomancer" | "Reaper" | "Red_Mage"
+  | "Samurai" | "Summoner" | "Viper";
+
 export type RaceType =
   | "환상약O"
   | "환상약X"
@@ -62,6 +69,8 @@ export interface ProfileData {
   meRace: RaceType[];
   youRace: RaceType[];
   // Contents
+  myJob: JobType[];
+  youJob: JobType[];
   mySelected: string[];
   myCustom: string[];
   myContentMemo: string;

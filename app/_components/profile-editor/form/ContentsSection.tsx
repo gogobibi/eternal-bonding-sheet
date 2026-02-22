@@ -5,10 +5,16 @@ import { MeLabel } from "../atoms/MeLabel";
 import { Chip } from "../atoms/Chip";
 import { FieldInput } from "../atoms/FieldInput";
 import { FieldTextarea } from "../atoms/FieldTextarea";
+import { JobPicker } from "../atoms/JobPicker";
 import { CONTENT_GROUPS } from "../constants";
 import { toggleArr } from "../helpers";
+import type { JobType } from "../types";
 
 interface Props {
+  myJob: JobType[];
+  setMyJob: React.Dispatch<React.SetStateAction<JobType[]>>;
+  youJob: JobType[];
+  setYouJob: React.Dispatch<React.SetStateAction<JobType[]>>;
   mySelected: string[];
   setMySelected: React.Dispatch<React.SetStateAction<string[]>>;
   myCustom: string[];
@@ -32,6 +38,10 @@ interface Props {
 }
 
 export const ContentsSection: React.FC<Props> = ({
+  myJob,
+  setMyJob,
+  youJob,
+  setYouJob,
   mySelected,
   setMySelected,
   myCustom,
@@ -56,6 +66,7 @@ export const ContentsSection: React.FC<Props> = ({
   <SectionCard title="주 컨텐츠">
     <div className="space-y-3">
       <MeLabel />
+      <JobPicker value={myJob} onChange={setMyJob} />
       {CONTENT_GROUPS.map((group) => (
         <div key={group.label}>
           <p className="text-[9px] text-stone-300 mb-1.5">{group.label}</p>
@@ -65,9 +76,7 @@ export const ContentsSection: React.FC<Props> = ({
                 key={item}
                 label={item}
                 selected={mySelected.includes(item)}
-                onClick={() =>
-                  setMySelected((prev) => toggleArr(prev, item))
-                }
+                onClick={() => setMySelected((prev) => toggleArr(prev, item))}
               />
             ))}
           </div>
@@ -124,6 +133,9 @@ export const ContentsSection: React.FC<Props> = ({
         <div className="text-[10px] tracking-[0.22em] uppercase text-violet-400">
           YOU
         </div>
+      </div>
+      <JobPicker value={youJob} onChange={setYouJob} align="right" />
+      <div className="flex justify-end">
         <button
           type="button"
           onClick={() => setYouContentsEnabled((p) => !p)}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ProfileData, PhotoItem, PlayStyleItem, CouplingType, RaceType } from "./types";
+import type { ProfileData, PhotoItem, PlayStyleItem, CouplingType, RaceType, JobType } from "./types";
 import { toggleTypeTier } from "./helpers";
 
 export function useProfileForm() {
@@ -43,6 +43,8 @@ export function useProfileForm() {
   const [youRace, setYouRace] = useState<RaceType[]>([]);
 
   // 4. Main contents
+  const [myJob, setMyJob] = useState<JobType[]>([]);
+  const [youJob, setYouJob] = useState<JobType[]>([]);
   const [mySelected, setMySelected] = useState<string[]>([]);
   const [myCustom, setMyCustom] = useState<string[]>([]);
   const [myCustomInput, setMyCustomInput] = useState("");
@@ -94,6 +96,8 @@ export function useProfileForm() {
     couplingPriority,
     meRace,
     youRace,
+    myJob,
+    youJob,
     mySelected,
     myCustom,
     myContentMemo,
@@ -216,6 +220,8 @@ export function useProfileForm() {
       youRace, setYouRace,
     },
     contents: {
+      myJob, setMyJob,
+      youJob, setYouJob,
       mySelected, setMySelected,
       myCustom, setMyCustom,
       myCustomInput, setMyCustomInput,
