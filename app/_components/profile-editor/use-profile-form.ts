@@ -1,5 +1,6 @@
 import { useState } from "react";
-import type { ProfileData, PhotoItem, PlayStyleItem } from "./types";
+import type { ProfileData, PhotoItem, PlayStyleItem, CouplingType, RaceType } from "./types";
+import { toggleTypeTier } from "./helpers";
 
 export function useProfileForm() {
   // Display option
@@ -37,6 +38,9 @@ export function useProfileForm() {
   const [charImages, setCharImages] = useState<PhotoItem[]>([]);
   const [charMemo, setCharMemo] = useState("");
   const [youCharMemo, setYouCharMemo] = useState("");
+  const [couplingPriority, setCouplingPriority] = useState<CouplingType[][]>([[], [], []]);
+  const [meRace, setMeRace] = useState<RaceType[]>([]);
+  const [youRace, setYouRace] = useState<RaceType[]>([]);
 
   // 4. Main contents
   const [mySelected, setMySelected] = useState<string[]>([]);
@@ -87,6 +91,9 @@ export function useProfileForm() {
     charImages,
     charMemo,
     youCharMemo,
+    couplingPriority,
+    meRace,
+    youRace,
     mySelected,
     myCustom,
     myContentMemo,
@@ -112,25 +119,38 @@ export function useProfileForm() {
     e.target.value = "";
   };
 
+  const MAX_CHAR_IMAGES = 10;
+  const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10MB
+
   const handleCharUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
     Array.from(files).forEach((file) => {
+      if (file.size > MAX_FILE_BYTES) {
+        alert(`${file.name}\n파일 크기가 너무 큽니다 (최대 10MB).\n더 작은 이미지를 업로드해 주세요.`);
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (ev) => {
-        setCharImages((prev) => [
-          ...prev,
-          {
-            id: Date.now().toString() + Math.random(),
-            imageUrl: ev.target?.result as string,
-            description: "",
-          },
-        ]);
+        setCharImages((prev) => {
+          if (prev.length >= MAX_CHAR_IMAGES) return prev;
+          return [
+            ...prev,
+            {
+              id: Date.now().toString() + Math.random(),
+              imageUrl: ev.target?.result as string,
+              description: "",
+            },
+          ];
+        });
       };
       reader.readAsDataURL(file);
     });
     e.target.value = "";
   };
+
+  const handleCouplingClick = (type: CouplingType, tierIndex: number) =>
+    setCouplingPriority((prev) => toggleTypeTier(type, tierIndex, prev));
 
   const addPlayStyle = () =>
     setPlayStyles((prev) => [
@@ -190,6 +210,10 @@ export function useProfileForm() {
       charMemo, setCharMemo,
       youCharMemo, setYouCharMemo,
       handleCharUpload,
+      couplingPriority,
+      onCouplingClick: handleCouplingClick,
+      meRace, setMeRace,
+      youRace, setYouRace,
     },
     contents: {
       mySelected, setMySelected,

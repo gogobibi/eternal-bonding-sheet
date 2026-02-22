@@ -3,10 +3,12 @@ import Image from "next/image";
 import { Upload, X } from "lucide-react";
 import { SectionCard } from "../atoms/SectionCard";
 import { MeLabel } from "../atoms/MeLabel";
-import { Mini } from "../atoms/Mini";
 import { OptionBtn } from "../atoms/OptionBtn";
 import { FieldTextarea } from "../atoms/FieldTextarea";
-import type { PhotoItem } from "../types";
+import { CouplingPicker } from "../atoms/CouplingPicker";
+import { RacePicker } from "../atoms/RacePicker";
+import type { PhotoItem, CouplingType, RaceType } from "../types";
+import { toggleArr } from "../helpers";
 
 interface Props {
   displayOption: "image-only" | "image-with-text";
@@ -18,6 +20,12 @@ interface Props {
   youCharMemo: string;
   setYouCharMemo: (v: string) => void;
   handleCharUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  couplingPriority: CouplingType[][];
+  onCouplingClick: (type: CouplingType, tierIndex: number) => void;
+  meRace: RaceType[];
+  setMeRace: React.Dispatch<React.SetStateAction<RaceType[]>>;
+  youRace: RaceType[];
+  setYouRace: React.Dispatch<React.SetStateAction<RaceType[]>>;
 }
 
 export const CharacterSection: React.FC<Props> = ({
@@ -30,35 +38,45 @@ export const CharacterSection: React.FC<Props> = ({
   youCharMemo,
   setYouCharMemo,
   handleCharUpload,
+  couplingPriority,
+  onCouplingClick,
+  meRace,
+  setMeRace,
+  youRace,
+  setYouRace,
 }) => (
-  <SectionCard title="커마 (캐릭터)">
-    <div className="flex items-center gap-2 mb-4 pb-4 border-b border-stone-100">
-      <p className="text-[10px] text-stone-400 mr-1">표시 방식</p>
-      <OptionBtn
-        label="이미지만"
-        size="sm"
-        selected={displayOption === "image-only"}
-        onClick={() => setDisplayOption("image-only")}
-      />
-      <OptionBtn
-        label="이미지 + 설명"
-        size="sm"
-        selected={displayOption === "image-with-text"}
-        onClick={() => setDisplayOption("image-with-text")}
-      />
-    </div>
+  <SectionCard title="커마 · 커플링">
     <div className="space-y-3">
       <MeLabel />
-      <button
-        type="button"
-        onClick={() =>
-          document.getElementById("char-img-upload")?.click()
-        }
-        className="w-full py-3 border border-dashed border-stone-200 rounded-xl flex items-center justify-center gap-2 text-stone-400 hover:border-violet-300 hover:text-violet-400 transition-colors"
-      >
-        <Upload className="h-4 w-4" />
-        <span className="text-xs">이미지 추가</span>
-      </button>
+      <div className="flex items-center gap-2 mb-4 pb-4 border-b border-stone-100">
+        <p className="text-[10px] text-stone-400 mr-1">표시 방식</p>
+        <OptionBtn
+          label="이미지만"
+          size="sm"
+          selected={displayOption === "image-only"}
+          onClick={() => setDisplayOption("image-only")}
+        />
+        <OptionBtn
+          label="이미지 + 설명"
+          size="sm"
+          selected={displayOption === "image-with-text"}
+          onClick={() => setDisplayOption("image-with-text")}
+        />
+      </div>
+      {charImages.length < 10 ? (
+        <button
+          type="button"
+          onClick={() => document.getElementById("char-img-upload")?.click()}
+          className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-stone-200 py-3 text-stone-400 transition-colors hover:border-violet-300 hover:text-violet-400"
+        >
+          <Upload className="h-4 w-4" />
+          <span className="text-xs">이미지 추가 ({charImages.length}/10)</span>
+        </button>
+      ) : (
+        <div className="flex w-full items-center justify-center rounded-xl border border-dashed border-stone-200 py-3 text-stone-300">
+          <span className="text-xs">최대 10장까지 등록 가능합니다</span>
+        </div>
+      )}
       <input
         id="char-img-upload"
         type="file"
@@ -135,23 +153,34 @@ export const CharacterSection: React.FC<Props> = ({
             ))}
           </div>
         ))}
+      <RacePicker
+        value={meRace}
+        onChange={(race) =>
+          setMeRace((prev) => toggleArr(prev as string[], race) as RaceType[])
+        }
+      />
+      <CouplingPicker value={couplingPriority} onChange={onCouplingClick} />
       <div>
-        <Mini>ME 메모</Mini>
         <FieldTextarea
           value={charMemo}
           onChange={(e) => setCharMemo(e.target.value)}
-          placeholder="캐릭터에 대한 설명이나 메모..."
+          placeholder="커마 · 커플링에 대한 설명이나 메모"
           rows={3}
         />
       </div>
     </div>
     <div className="border-t border-stone-100 mt-5 pt-4 space-y-2">
       <MeLabel right />
-      <Mini right>원하시는 커마 스타일이 있다면</Mini>
+      <RacePicker
+        value={youRace}
+        onChange={(race) =>
+          setYouRace((prev) => toggleArr(prev as string[], race) as RaceType[])
+        }
+      />
       <FieldTextarea
         value={youCharMemo}
         onChange={(e) => setYouCharMemo(e.target.value)}
-        placeholder="원하는 커마 스타일, 조건 등..."
+        placeholder="원하는 커마 스타일, 조건 등"
         rows={3}
         className="text-right"
       />
