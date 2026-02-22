@@ -17,18 +17,16 @@ export const CardPlayStyle: React.FC<{ playStyles: PlayStyleItem[] }> = ({
             .map((item) => (
               <div
                 key={item.id}
-                className={`flex items-start gap-2 ${
-                  item.emphasized
-                    ? "px-2.5 py-[5px] bg-amber-100 rounded-lg border border-amber-200"
-                    : "px-0 py-[3px]"
+                className={`flex items-start gap-2 px-2.5 py-[3px] ${
+                  item.emphasized ? " bg-amber-50 rounded-lg" : ""
                 }`}
               >
                 <span
-                  className={`text-[11px] shrink-0 mt-px leading-[1.6] ${
-                    item.emphasized ? "text-amber-500" : "text-stone-300"
+                  className={`text-[11px] shrink-0 mt-px leading-[1.6] inline-flex w-3 justify-center ${
+                    item.emphasized ? "text-amber-300" : "text-stone-300"
                   }`}
                 >
-                  {item.emphasized ? "\u2605" : "\u00B7"}
+                  {item.emphasized ? "\u2605" : "\u2013"}
                 </span>
                 <span
                   className={`text-[11px] leading-[1.7] ${
