@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { SectionCard } from "../atoms/SectionCard";
 import { MeLabel } from "../atoms/MeLabel";
 import { Mini } from "../atoms/Mini";
@@ -8,7 +8,7 @@ import { Chip } from "../atoms/Chip";
 import { TimeChip } from "../atoms/TimeChip";
 import { FieldInput } from "../atoms/FieldInput";
 import { FieldTextarea } from "../atoms/FieldTextarea";
-import { SERVERS, AGE_DECADES, AGE_PHASES, TIME_SLOTS } from "../constants";
+import { SERVERS, AGE_DECADES, AGE_DECADE_LABELS, TIME_SLOTS } from "../constants";
 import { toggleArr } from "../helpers";
 import { useTheme } from "../ThemeContext";
 
@@ -26,8 +26,8 @@ interface Props {
     setMeGender: React.Dispatch<React.SetStateAction<string>>;
     meGenderCustom: string;
     setMeGenderCustom: (v: string) => void;
-    meAge: string;
-    setMeAge: (v: string) => void;
+    meAge: string[];
+    setMeAge: (v: string[]) => void;
     meWeekday: string[];
     setMeWeekday: React.Dispatch<React.SetStateAction<string[]>>;
     meWeekend: string[];
@@ -55,59 +55,76 @@ interface Props {
   };
 }
 
+function decadePrefix(decade: string): string {
+  return decade.replace("대 이상", "").replace("대", "");
+}
+
+function buildAgeTag(decade: string, phase: "↑" | "↓" | null): string {
+  if (decade === "50대 이상") return "50↑";
+  const prefix = decadePrefix(decade);
+  if (phase === null) return `${prefix}대`;
+  return `${prefix}${phase}`;
+}
+
+function addAgeTag(
+  currentList: string[],
+  decade: string,
+  phase: "↑" | "↓" | null
+): string[] | null {
+  const tag = buildAgeTag(decade, phase);
+  if (currentList.includes(tag)) return null;
+  const prefix = decadePrefix(decade);
+  const filtered = currentList.filter((a) => !a.startsWith(prefix));
+  if (phase === "↑" && filtered.some((a) => a.endsWith("↑"))) return null;
+  if (phase === "↓" && filtered.some((a) => a.endsWith("↓"))) return null;
+  return [...filtered, tag];
+}
+
+function applySpecialAge(opt: "미성년자" | "성인", current: string[]): string[] {
+  if (current.includes(opt)) {
+    return current.filter((a) => a !== opt);
+  }
+  const specialOnly = current.filter((a) => a === "미성년자" || a === "성인");
+  return [...specialOnly, opt];
+}
+
 export const BasicInfoSection: React.FC<Props> = ({
   basic,
   basicMe,
   basicYou,
 }) => {
   const theme = useTheme();
-  const [meDecade, setMeDecade] = useState("");
-  const [mePhase, setMePhase] = useState("");
+  const [meDecadeTemp, setMeDecadeTemp] = useState("");
   const [youDecadeTemp, setYouDecadeTemp] = useState("");
 
-  useEffect(() => {
-    if (!meDecade) {
-      basicMe.setMeAge("");
-      return;
+  const addMeAge = (decade: string, phase: "↑" | "↓" | null) => {
+    const result = addAgeTag(basicMe.meAge, decade, phase);
+    if (result) {
+      basicMe.setMeAge(result);
+      setMeDecadeTemp("");
     }
-    if (meDecade === "50대 이상") {
-      basicMe.setMeAge("50대 이상");
-    } else if (mePhase) {
-      basicMe.setMeAge(`${meDecade} ${mePhase}`);
-    } else {
-      basicMe.setMeAge(meDecade);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [meDecade, mePhase]);
+  };
 
-  const addYouAge = (decade: string, phase?: string) => {
-    const tag = phase ? `${decade} ${phase}` : decade;
-    if (basicYou.youAge.includes(tag)) return;
-    const filtered = basicYou.youAge.filter((a) => a !== "무관");
-    basicYou.setYouAge([...filtered, tag]);
-    setYouDecadeTemp("");
+  const removeMeAge = (tag: string) => {
+    basicMe.setMeAge(basicMe.meAge.filter((a) => a !== tag));
+  };
+
+  const addYouAge = (decade: string, phase: "↑" | "↓" | null) => {
+    const result = addAgeTag(basicYou.youAge, decade, phase);
+    if (result) {
+      basicYou.setYouAge(result);
+      setYouDecadeTemp("");
+    }
   };
 
   const removeYouAge = (tag: string) => {
     basicYou.setYouAge(basicYou.youAge.filter((a) => a !== tag));
   };
 
-  const handleDecadeClick = (decade: string) => {
-    if (decade === "50대 이상") {
-      addYouAge("50대 이상");
-      return;
-    }
-    setYouDecadeTemp((prev) => (prev === decade ? "" : decade));
-  };
-
-  const handlePhaseClick = (phase: string) => {
-    if (!youDecadeTemp) return;
-    if (phase === "세부표기안함") {
-      addYouAge(youDecadeTemp);
-    } else {
-      addYouAge(youDecadeTemp, phase);
-    }
-  };
+  const mHasSpecial = basicMe.meAge.some((a) => a === "미성년자" || a === "성인");
+  const yHasSpecial = basicYou.youAge.some((a) => a === "미성년자" || a === "성인");
+  const meAgeTags = basicMe.meAge.filter((a) => a !== "미성년자" && a !== "성인");
+  const youAgeTags = basicYou.youAge.filter((a) => a !== "미성년자" && a !== "성인");
 
   return (
     <SectionCard title="기본 정보">
@@ -185,52 +202,90 @@ export const BasicInfoSection: React.FC<Props> = ({
           </div>
           <div>
             <Mini>나이대</Mini>
-            <div className="flex flex-wrap gap-1">
+            {/* 미성년자/성인 */}
+            <div className="flex flex-wrap gap-1 mb-1">
+              {(["미성년자", "성인"] as const).map((opt) => (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => {
+                    basicMe.setMeAge(applySpecialAge(opt, basicMe.meAge));
+                    setMeDecadeTemp("");
+                  }}
+                  className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${
+                    basicMe.meAge.includes(opt)
+                      ? theme.ageDecadeSelected
+                      : "border-stone-200 bg-stone-50 text-stone-400"
+                  }`}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+            {/* 선택된 나이 태그 */}
+            {meAgeTags.length > 0 && (
+              <div className="mb-1.5 flex flex-wrap gap-1">
+                {meAgeTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className={`inline-flex items-center gap-0.5 rounded border ${theme.ageYouTag} px-1.5 py-0.5 text-[9px]`}
+                  >
+                    {tag}
+                    <button
+                      type="button"
+                      onClick={() => removeMeAge(tag)}
+                      className={theme.ageYouRemove}
+                      aria-label={`${tag} 제거`}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+              </div>
+            )}
+            {/* 나이대 버튼 */}
+            <div className={`flex flex-wrap gap-1 ${mHasSpecial ? "opacity-40 pointer-events-none" : ""}`}>
               {AGE_DECADES.map((decade) => (
                 <button
                   key={decade}
                   type="button"
                   onClick={() => {
-                    if (meDecade === decade) {
-                      setMeDecade("");
-                      setMePhase("");
+                    if (decade === "50대 이상") {
+                      addMeAge(decade, "↑");
                     } else {
-                      setMeDecade(decade);
-                      if (decade === "50대 이상") setMePhase("");
+                      setMeDecadeTemp((prev) => (prev === decade ? "" : decade));
                     }
                   }}
                   className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${
-                    meDecade === decade
+                    meDecadeTemp === decade
                       ? theme.ageDecadeSelected
                       : "border-stone-200 bg-stone-50 text-stone-400"
                   }`}
                 >
-                  {decade}
+                  {AGE_DECADE_LABELS[decade]}
                 </button>
               ))}
             </div>
-            {meDecade && meDecade !== "50대 이상" && (
+            {/* 세부 선택 */}
+            {meDecadeTemp && !mHasSpecial && (
               <div className="mt-1 flex flex-wrap gap-1">
-                {[...AGE_PHASES, "세부표기안함"].map((phase) => (
+                {(["↑", "↓"] as const).map((phase) => (
                   <button
                     key={phase}
                     type="button"
-                    onClick={() =>
-                      setMePhase(phase === "세부표기안함" ? "" : phase)
-                    }
-                    className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${
-                      (
-                        phase === "세부표기안함"
-                          ? mePhase === ""
-                          : mePhase === phase
-                      )
-                        ? theme.ageDecadeSelected
-                        : "border-stone-200 bg-stone-50 text-stone-400"
-                    }`}
+                    onClick={() => addMeAge(meDecadeTemp, phase)}
+                    className={`rounded border border-stone-200 bg-stone-50 px-1.5 py-0.5 text-[9px] text-stone-400 transition-all ${theme.agePhaseHover}`}
                   >
-                    {phase}
+                    {phase === "↑" ? "이상(↑)" : "이하(↓)"}
                   </button>
                 ))}
+                <button
+                  type="button"
+                  onClick={() => addMeAge(meDecadeTemp, null)}
+                  className={`rounded border border-stone-200 bg-stone-50 px-1.5 py-0.5 text-[9px] text-stone-400 transition-all ${theme.agePhaseHover}`}
+                >
+                  세부표기안함
+                </button>
               </div>
             )}
           </div>
@@ -303,80 +358,91 @@ export const BasicInfoSection: React.FC<Props> = ({
           </div>
           <div>
             <Mini right>나이대</Mini>
-            <div className="mb-1 flex justify-end">
-              <button
-                type="button"
-                onClick={() => {
-                  const isAny = basicYou.youAge.includes("무관");
-                  if (isAny) {
-                    basicYou.setYouAge([]);
-                  } else {
-                    basicYou.setYouAge(["무관"]);
+            {/* 미성년자/성인 */}
+            <div className="flex flex-wrap gap-1 justify-end mb-1">
+              {(["미성년자", "성인"] as const).map((opt) => (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => {
+                    basicYou.setYouAge(applySpecialAge(opt, basicYou.youAge));
                     setYouDecadeTemp("");
-                  }
-                }}
-                className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${
-                  basicYou.youAge.includes("무관")
-                    ? "border-stone-300 bg-stone-200 text-stone-500"
-                    : "border-stone-200 bg-stone-50 text-stone-400"
-                }`}
-              >
-                무관
-              </button>
+                  }}
+                  className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${
+                    basicYou.youAge.includes(opt)
+                      ? theme.ageDecadeSelected
+                      : "border-stone-200 bg-stone-50 text-stone-400"
+                  }`}
+                >
+                  {opt}
+                </button>
+              ))}
             </div>
-            {!basicYou.youAge.includes("무관") && (
-              <>
-                {basicYou.youAge.length > 0 && (
-                  <div className="mb-1.5 flex flex-wrap justify-end gap-1">
-                    {basicYou.youAge.map((tag) => (
-                      <span
-                        key={tag}
-                        className={`inline-flex items-center gap-0.5 rounded border ${theme.ageYouTag} px-1.5 py-0.5 text-[9px]`}
-                      >
-                        {tag}
-                        <button
-                          type="button"
-                          onClick={() => removeYouAge(tag)}
-                          className={theme.ageYouRemove}
-                          aria-label={`${tag} 제거`}
-                        >
-                          ×
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                )}
-                <div className="flex flex-wrap justify-end gap-1">
-                  {AGE_DECADES.map((decade) => (
+            {/* 선택된 나이 태그 */}
+            {youAgeTags.length > 0 && (
+              <div className="mb-1.5 flex flex-wrap justify-end gap-1">
+                {youAgeTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className={`inline-flex items-center gap-0.5 rounded border ${theme.ageYouTag} px-1.5 py-0.5 text-[9px]`}
+                  >
+                    {tag}
                     <button
-                      key={decade}
                       type="button"
-                      onClick={() => handleDecadeClick(decade)}
-                      className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${
-                        youDecadeTemp === decade
-                          ? theme.ageDecadeSelected
-                          : "border-stone-200 bg-stone-50 text-stone-400"
-                      }`}
+                      onClick={() => removeYouAge(tag)}
+                      className={theme.ageYouRemove}
+                      aria-label={`${tag} 제거`}
                     >
-                      {decade}
+                      ×
                     </button>
-                  ))}
-                </div>
-                {youDecadeTemp && youDecadeTemp !== "50대 이상" && (
-                  <div className="mt-1 flex flex-wrap justify-end gap-1">
-                    {[...AGE_PHASES, "세부표기안함"].map((phase) => (
-                      <button
-                        key={phase}
-                        type="button"
-                        onClick={() => handlePhaseClick(phase)}
-                        className={`rounded border border-stone-200 bg-stone-50 px-1.5 py-0.5 text-[9px] text-stone-400 transition-all ${theme.agePhaseHover}`}
-                      >
-                        {phase}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </>
+                  </span>
+                ))}
+              </div>
+            )}
+            {/* 나이대 버튼 */}
+            <div className={`flex flex-wrap justify-end gap-1 ${yHasSpecial ? "opacity-40 pointer-events-none" : ""}`}>
+              {AGE_DECADES.map((decade) => (
+                <button
+                  key={decade}
+                  type="button"
+                  onClick={() => {
+                    if (decade === "50대 이상") {
+                      addYouAge(decade, "↑");
+                    } else {
+                      setYouDecadeTemp((prev) => (prev === decade ? "" : decade));
+                    }
+                  }}
+                  className={`rounded border px-1.5 py-0.5 text-[9px] transition-all ${
+                    youDecadeTemp === decade
+                      ? theme.ageDecadeSelected
+                      : "border-stone-200 bg-stone-50 text-stone-400"
+                  }`}
+                >
+                  {AGE_DECADE_LABELS[decade]}
+                </button>
+              ))}
+            </div>
+            {/* 세부 선택 */}
+            {youDecadeTemp && !yHasSpecial && (
+              <div className="mt-1 flex flex-wrap justify-end gap-1">
+                {(["↑", "↓"] as const).map((phase) => (
+                  <button
+                    key={phase}
+                    type="button"
+                    onClick={() => addYouAge(youDecadeTemp, phase)}
+                    className={`rounded border border-stone-200 bg-stone-50 px-1.5 py-0.5 text-[9px] text-stone-400 transition-all ${theme.agePhaseHover}`}
+                  >
+                    {phase === "↑" ? "이상(↑)" : "이하(↓)"}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => addYouAge(youDecadeTemp, null)}
+                  className={`rounded border border-stone-200 bg-stone-50 px-1.5 py-0.5 text-[9px] text-stone-400 transition-all ${theme.agePhaseHover}`}
+                >
+                  세부표기안함
+                </button>
+              </div>
             )}
           </div>
           <div>
