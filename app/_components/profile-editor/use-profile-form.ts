@@ -23,7 +23,7 @@ export function useProfileForm() {
   // ME
   const [meGender, setMeGender] = useState("");
   const [meGenderCustom, setMeGenderCustom] = useState("");
-  const [meAge, setMeAge] = useState("");
+  const [meAge, setMeAge] = useState<string[]>([]);
   const [meWeekday, setMeWeekday] = useState<string[]>([]);
   const [meWeekend, setMeWeekend] = useState<string[]>([]);
   const [meTimeMemo, setMeTimeMemo] = useState("");

@@ -73,7 +73,7 @@ export interface ProfileData {
   // ME
   meGender: string;
   meGenderCustom: string;
-  meAge: string;
+  meAge: string[];
   meWeekday: string[];
   meWeekend: string[];
   meTimeMemo: string;

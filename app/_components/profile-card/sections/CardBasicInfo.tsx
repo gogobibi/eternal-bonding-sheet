@@ -17,15 +17,27 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
   const youGenderDisplay =
     data.youGender === "직접기입" ? data.youGenderCustom : data.youGender;
 
+  const hasYouData = !!(
+    youGenderDisplay ||
+    data.youAge.length > 0 ||
+    data.youWeekdayAny ||
+    data.youWeekday.length > 0 ||
+    data.youWeekendAny ||
+    data.youWeekend.length > 0 ||
+    data.youTimeMemo
+  );
+
   return (
     <div className="mb-6">
       <SectionBlock title="기본 소개">
-        <div className="grid grid-cols-2">
+        <div className={hasYouData ? "grid grid-cols-2" : ""}>
           {/* ME */}
-          <div className="pr-4">
-            <div className={`text-[9px] tracking-[0.2em] uppercase ${theme.cardLabel} font-semibold mb-2`}>
-              ME
-            </div>
+          <div className={hasYouData ? "pr-4" : ""}>
+            {hasYouData && (
+              <div className={`text-[9px] tracking-[0.2em] uppercase ${theme.cardLabel} font-semibold mb-2`}>
+                ME
+              </div>
+            )}
             <div className="flex flex-col gap-1.5">
               {meGenderDisplay && (
                 <div className="flex items-center gap-1.5">
@@ -35,12 +47,16 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                   <Pill>{meGenderDisplay}</Pill>
                 </div>
               )}
-              {data.meAge && (
-                <div className="flex items-center gap-1.5">
+              {data.meAge.length > 0 && (
+                <div className="flex items-start gap-1.5">
                   <span className="min-w-[26px] text-[9px] text-stone-500">
                     나이
                   </span>
-                  <Pill size="sm">{data.meAge}</Pill>
+                  <div className="flex flex-wrap gap-1">
+                    {data.meAge.map((age) => (
+                      <Pill size="sm" key={age}>{age}</Pill>
+                    ))}
+                  </div>
                 </div>
               )}
               {(data.meWeekday.length > 0 || data.meWeekend.length > 0) && (
@@ -79,7 +95,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
           </div>
 
           {/* YOU */}
-          <div className="pl-4 border-l border-stone-200">
+          {hasYouData && <div className="pl-4 border-l border-stone-200">
             <div className={`text-[9px] tracking-[0.2em] uppercase ${theme.cardLabel} font-semibold mb-2 text-right`}>
               YOU
             </div>
@@ -146,7 +162,7 @@ export const CardBasicInfo: React.FC<{ data: ProfileData }> = ({ data }) => {
                 </div>
               )}
             </div>
-          </div>
+          </div>}
         </div>
       </SectionBlock>
     </div>

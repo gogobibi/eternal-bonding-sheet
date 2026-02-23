@@ -1,23 +1,14 @@
 export const TIME_SLOTS = ["아침", "오전", "오후", "저녁", "밤", "새벽"];
 
-export const AGE_OPTIONS = [
-  "10대 초반",
-  "10대 중반",
-  "10대 후반",
-  "20대 초반",
-  "20대 중반",
-  "20대 후반",
-  "30대 초반",
-  "30대 중반",
-  "30대 후반",
-  "40대 초반",
-  "40대 중반",
-  "40대 후반",
-  "50대 이상",
-];
-
 export const AGE_DECADES = ["10대", "20대", "30대", "40대", "50대 이상"];
-export const AGE_PHASES = ["초반", "중반", "후반"];
+
+export const AGE_DECADE_LABELS: Record<string, string> = {
+  "10대": "10",
+  "20대": "20",
+  "30대": "30",
+  "40대": "40",
+  "50대 이상": "50↑",
+};
 
 export const CONTENT_GROUPS = [
   {
