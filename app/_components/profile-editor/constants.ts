@@ -36,6 +36,6 @@ export const CONTENT_GROUPS = [
   { label: "기타", items: ["칭호·업적작", "골드소서", "마작"] },
 ];
 
-export const SERVERS = ["카벙클", "펜리르", "초코보", "모그리"];
+export const SERVERS = ["카벙클", "펜리르", "초코보", "모그리", "톤베리"];
 export const COVENANT_PLANS = ["스탠다드", "골드", "플래티넘", "무관"];
 export const SERVER_OPTIONS = ["O", "X", "△"];
