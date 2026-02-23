@@ -16,9 +16,7 @@ export const OptionBtn: React.FC<{
       type="button"
       onClick={onClick}
       className={`rounded-lg border transition-all leading-none ${
-        size === "sm"
-          ? "px-2 py-0.5 text-[10px]"
-          : "px-3 py-1.5 text-xs"
+        size === "sm" ? "px-2 py-0.5 text-[10px]" : "px-2.5 py-1.5 text-[11px]"
       } ${
         selected
           ? theme.optionBtnSelected
